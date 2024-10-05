@@ -1,3 +1,6 @@
+import Equipe from "@/components/Equipe/Equipe";
+import Carousel from "@/components/TesteEquipe/TestemunhosCarrousel";
+import ListaDeTestemunhos from "@/components/Testemunhos/lista_testemunhos";
 import Image from "next/image";
 
 export default function Home() {
@@ -17,8 +20,10 @@ export default function Home() {
         </div>
         <div className="tablet:hidden w-1/2 flex justify-center items-center ">
           <Image
-            src={help}
+            src="/img/help.webp"
             alt="Ajudamos você com os problemas veiculares"
+            height={400}
+            width={400}
             className="celular:h-40 celular:w-40 h-[400px] object-contain rounded"
           />
         </div>
@@ -38,7 +43,7 @@ export default function Home() {
       </section>
       <section className="celular:w-full celular:px-4 w-5/6 flex justify-evenly items-center gap-3 my-4 h-[600px] m-auto">
         <div className="tablet:hidden w-1/4 flex justify-center items-center">
-          <Image src={guincho} alt="Imagem guincho" />
+          <Image src="/img/porto-guincho.webp" alt="Imagem guincho" width={600} height={600}/>
         </div>
         <div className="celular:w-full! w-3/4 tablet:w-full flex justify-center items-center flex-col">
           <h2 className="celular:text-3xl celular:pb-7 font-medium text-center text-black text-5xl pb-[50px]">
