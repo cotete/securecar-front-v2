@@ -1,3 +1,5 @@
+"use client";
+
 import InputArea from "@/components/InputArea/InputArea"; 
 import AreaPerfil from "../AreaPerfil/AreaPerfil"; 
 import { useState } from "react";

@@ -1,3 +1,5 @@
+"use client";
+
 import DropDown from "../DropDown/DropDown";
 
 type AcessibilidadeProps ={

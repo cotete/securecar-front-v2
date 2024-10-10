@@ -1,4 +1,6 @@
 
+"use client";
+
 import Botao from '@/components/Botao/Botao';
 import InputArea from '@/components/InputArea/InputArea';
 import { useState } from 'react';

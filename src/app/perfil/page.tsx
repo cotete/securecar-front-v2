@@ -1,14 +1,14 @@
 "use client";
-import Acessibilidade from "@/components/Perfil/Acessibilidade/Acessibilidade";
-import BtnSessoesPerfil from "@/components/Perfil/BtnSessoesPerfil/BtnSessoesPerfil";
-import Carros from "@/components/Perfil/Carros/Carros";
-import Endereco from "@/components/Perfil/Endereco/Endereco";
-import SuasConfiguracoes from "@/components/Perfil/SuasConfiguracoes/SuasConfiguracoes";
+import Acessibilidade from "@/components/PerfilComponentes/Acessibilidade/Acessibilidade";
+import BtnSessoesPerfil from "@/components/PerfilComponentes/BtnSessoesPerfil/BtnSessoesPerfil";
+import Carros from "@/components/PerfilComponentes/Carros/Carros";
+import Endereco from "@/components/PerfilComponentes/Endereco/Endereco";
+import SuasConfiguracoes from "@/components/PerfilComponentes/SuasConfiguracoes/SuasConfiguracoes";
 import { useState } from "react";
 
 
 
-const PaginaSuaConta = ()=>{
+const perfil = ()=>{
     
     const [conteudo,setConteudo] = useState("Suas Configuracoes")
     const [fontSize, setFontSize] = useState("")
@@ -88,4 +88,4 @@ const PaginaSuaConta = ()=>{
     )
 }
 
-export default PaginaSuaConta
+export default perfil

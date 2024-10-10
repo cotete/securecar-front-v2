@@ -1,5 +1,5 @@
+"use client";
 import { useState } from "react";
-
 import BtnAdicionarCarro from "../BtnAdicionarCarro/BtnAdicionarCarro";
 import { Carro } from "@/app/types"; 
 import CarroCard from "../CarroCard/CarroCard";
