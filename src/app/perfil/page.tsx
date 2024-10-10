@@ -1,5 +1,9 @@
+"use client";
+import Acessibilidade from "@/components/Perfil/Acessibilidade/Acessibilidade";
 import BtnSessoesPerfil from "@/components/Perfil/BtnSessoesPerfil/BtnSessoesPerfil";
 import Carros from "@/components/Perfil/Carros/Carros";
+import Endereco from "@/components/Perfil/Endereco/Endereco";
+import SuasConfiguracoes from "@/components/Perfil/SuasConfiguracoes/SuasConfiguracoes";
 import { useState } from "react";
 
 
