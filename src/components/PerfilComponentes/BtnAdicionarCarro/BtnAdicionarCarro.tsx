@@ -24,7 +24,7 @@ const BtnAdicionarCarro = ({onAddCarro} : btnAdicionarCarroProps) =>{
 
     return(
         <div className="addCarro">
-            <Botao tipo="button" onClick={()=>setShow(true)}><Image className="h-10 group-hover:invert" src="/icons/add-circle-svgrepo-com.svg" alt="Imagem que sinaliza adição"></Image>Adicionar Carro</Botao>
+            <Botao tipo="button" onClick={()=>setShow(true)}><Image className="h-10 group-hover:invert" src="/icons/add-circle-svgrepo-com.svg" alt="Imagem que sinaliza adição" height={40} width={40}></Image>Adicionar Carro</Botao>
             <ModalAdicionarCarro onAddCarro={handleAddCarro}  isOpen = {show}><button className="btnClose" onClick={()=>setShow(false)}>X</button></ModalAdicionarCarro>
         </div>
     )

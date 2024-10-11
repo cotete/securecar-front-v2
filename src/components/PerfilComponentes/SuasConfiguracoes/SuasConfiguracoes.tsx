@@ -54,7 +54,7 @@ const SuasConfiguracoes = ({dataNascimento, nome,cpf,senha,email} : SuasConfigur
                     <form className='mt-6 flex flex-col' action="./" onSubmit={aoSalvar}>
                         <div className='w-full flex justify-between'>
                             <h2 className='text-3xl font-bold'>Informações</h2>
-                            <Image className='w-10 cursor-pointer' onClick={changeDisable} src='/icons/edit-svgrepo-com.svg' alt='Icone para mudar informações'/>
+                            <Image className='w-10 cursor-pointer' onClick={changeDisable} src='/icons/edit-svgrepo-com.svg' alt='Icone para mudar informações' height={40} width={40}/>
                         </div>
                         <InputArea onChange={valor=>setNomeUser(valor)} label='Nome' required={true} placeHolder={nome} value={nomeUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setEmailUser(valor)} label='Email' required={true} placeHolder={email} value={emailUser} disable={disable}></InputArea>
