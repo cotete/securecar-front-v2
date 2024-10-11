@@ -27,7 +27,7 @@ const Header = () => {
         <Image src="/img/logo_porto.svg" alt="Logo Porto" className="celular:h-7 celular:-mt-3 h-[40px] hover:scale-110 transition brightness-0 saturate-100 invert" height={40} width={100} objectFit="contain" />
       </Link>
       <NavBar />
-      <Link className="tablet:hidden static flex w-[129px] justify-end" href="/conta">
+      <Link className="tablet:hidden static flex w-[129px] justify-end" href="/perfil">
         <Image alt="Conta de perfil ícone" src="/icons/profile-pic.svg" className="h-[40px] hover:scale-110 transition" height={40} width={40} ></Image>
       </Link>
       <div className="tela:hidden">
