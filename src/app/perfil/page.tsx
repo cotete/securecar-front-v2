@@ -2,9 +2,10 @@
 import Acessibilidade from "@/components/PerfilComponentes/Acessibilidade/Acessibilidade";
 import BtnSessoesPerfil from "@/components/PerfilComponentes/BtnSessoesPerfil/BtnSessoesPerfil";
 import Carros from "@/components/PerfilComponentes/Carros/Carros";
+import Consertos from "@/components/PerfilComponentes/Consertos/Consertos";
 import Endereco from "@/components/PerfilComponentes/Endereco/Endereco";
 import SuasConfiguracoes from "@/components/PerfilComponentes/SuasConfiguracoes/SuasConfiguracoes";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 
@@ -16,7 +17,18 @@ const perfil = ()=>{
     const [acessibilidade, setAcessibilidade] = useState<boolean>()
     const [carros, setCarros] = useState<boolean>()
     const [endereco, setEndereco] = useState<boolean>()
+    const [consertos, setConsertos] = useState<boolean>()
     const [modo , setModo] = useState<boolean>()
+    
+    const [user, setUser] = useState<any>(null);
+
+    useEffect(() => {
+
+        const userString = sessionStorage.getItem("User");
+        if (userString) {
+            setUser(JSON.parse(userString));
+        }
+    }, []);
 
     const changeFonte = (fontSize : string) =>{
         if(fontSize === "16px"){
@@ -46,6 +58,7 @@ const perfil = ()=>{
         setCarros(nome === "Carros")
         setEndereco(nome === "Endereco")
         setAcessibilidade(nome === "Acessibilidade")
+        setConsertos(nome === "Consertos")
     }
 
     function Volta() {
@@ -59,13 +72,15 @@ const perfil = ()=>{
     const conteudoChanger = () => {
         switch(conteudo){
             case 'Suas Configuracoes':
-                return <SuasConfiguracoes dataNascimento="25/10/1980" nome="gerson bragantino" cpf="123.123.123-12" senha="********" email="gersonbragantino@email.com"/>
+                return <SuasConfiguracoes dataNascimento={user.dataNascimento} nome={user.name} cpf={user.cpf} senha={user.senha} email={user.email}/>
             case 'Acessibilidade':
                 return  <Acessibilidade onChangeFonte={changeFonte} onChangeModo={changeModo}/>
             case 'Endereco':
                 return <Endereco nome="gerson bragantino" cep="12312-123" numero="10" cidade="Sao pulo" estado="SP"/>
             case 'Carros':
                 return <Carros listaCarro={listaCarro}/>
+            case 'Consertos':
+                return <Consertos/>
             default:
                 return fontSize;
         }
@@ -79,6 +94,7 @@ const perfil = ()=>{
                 <BtnSessoesPerfil clicaImagem={Volta} clicado = {acessibilidade} name="Acessibilidade" onClick={() => mudaBotao("Acessibilidade")} />
                 <BtnSessoesPerfil clicaImagem={Volta} clicado = {endereco} name="Endereço" onClick={() => mudaBotao("Endereco")} />
                 <BtnSessoesPerfil clicaImagem={Volta} clicado = {carros} name="Carros" onClick={() => mudaBotao("Carros")} />
+                <BtnSessoesPerfil clicaImagem={Volta} clicado = {consertos} name="Consertos" onClick={() => mudaBotao("Consertos")} />
             </div>
             <div className={`tela:w-3/4 ${suasConfiguracoes ||conteudo === "Acessibilidade" || conteudo === "Endereco" || conteudo === "Carros" ? "tablet:flex flex":"tablet:hidden"} tablet:w-full  justify-center right px-10 py-6 h-4/5`}>
                 {conteudoChanger()}
