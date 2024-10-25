@@ -5,7 +5,7 @@ import Botao from '@/components/Botao/Botao';
 import InputArea from '@/components/InputArea/InputArea';
 import { useState } from 'react';
 import AreaPerfil from '../AreaPerfil/AreaPerfil';
-    import Image from 'next/image';
+import Image from 'next/image';
 
 type SuasConfiguracoesProps ={
     nome:string;
@@ -60,7 +60,7 @@ const SuasConfiguracoes = ({dataNascimento, nome,cpf,senha,email} : SuasConfigur
                         <InputArea onChange={valor=>setEmailUser(valor)} label='Email' required={true} placeHolder={email} value={emailUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setSenhaUser(valor)} label='Senha' required={true} placeHolder={senha} value={senhaUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setCpfUser(valor)} label='Cpf' required={true} placeHolder={cpf} value={cpfUser} disable={disable}></InputArea>
-                        <InputArea onChange={valor=>setDataNascimentoUser(valor)} label='Data de Nascimento' required={true} placeHolder={dataNascimento} value={dataNascimentoUser} disable={disable}></InputArea>
+                        <InputArea onChange={valor=>setDataNascimentoUser(valor)} label='Data de Nascimento' required={true} placeHolder={dataNascimento} value={dataNascimentoUser} disable={true}></InputArea>
                         <div className='mt-3 w-full flex justify-end'>
                             <Botao tipo='submit'>Salvar Informações</Botao>
                         </div>
