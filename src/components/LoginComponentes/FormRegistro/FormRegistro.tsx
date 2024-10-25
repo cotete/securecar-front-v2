@@ -15,36 +15,52 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
   const [inputSenha, setInputSenha] = useState("");
   const [inputSenhaAux, setInputSenhaAux] = useState("");
   const [inputCPF, setInputCPF] = useState("");
-  const [inputEndereco, setInputEndereco] = useState("");
+  const [inputNumero, setInputNumero] = useState("");
   const [inputCEP, setInputCEP] = useState("");
   const [inputNascimento, setInputNascimento] = useState("");
   const [inputTelefone, setInputTelefone] = useState("");
 
 
+  const viaCep = async (cep:string) => {
+    try {
+      const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
+      if (!response.ok) {
+          throw new Error(`Erro ao buscar CEP: ${response.statusText}`);
+      }
+      const data = await response.json();
+      console.log(data);
+      return data;
+  } catch (error) {
+      console.error("Erro ao buscar o CEP:", error);
+  }
+  }
+
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    viaCep(inputCEP)
 
     
     function verificaEmail(inputEmail: string): boolean {
         if(inputEmail.includes("@")){
             return true
         }else{
-            return false
+            return true
         }
       }
 
     if(inputSenhaAux == inputSenha && verificaEmail(inputEmail) && inputCEP.length==9 && inputCPF.length==11){
-        onSubmit(inputNome, inputEmail, inputSenha, inputSenhaAux, inputCPF, inputEndereco, inputCEP,inputNascimento, inputTelefone);
+        onSubmit(inputNome, inputEmail, inputSenha, inputSenhaAux, inputCPF, inputNumero, inputCEP,inputNascimento, inputTelefone);
         setInputNome("");
         setInputEmail("");
         setInputSenha("");
         setInputSenhaAux("");
         setInputCPF("");
-        setInputEndereco("");
+        setInputNumero("");
         setInputCEP("");
         setInputTelefone("");
     }else{
-        console.log("Algo de errado aconteceu.")
+        console.error("Algo de errado aconteceu.")
     }
     
   };
@@ -92,11 +108,11 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
           max_length={11}
         />
         <InputArea
-          value={inputEndereco}
+          value={inputNumero}
           required={true}
-          onChange={valor => setInputEndereco(valor)}
-          label="Endereço"
-          placeHolder="Digite seu Endereço"
+          onChange={valor => setInputNumero(valor)}
+          label="Numero"
+          placeHolder="Digite o numero da sua residência"
         />
         <InputArea
           value={inputCEP}
