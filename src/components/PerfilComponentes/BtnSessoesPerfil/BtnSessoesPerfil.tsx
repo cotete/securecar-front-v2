@@ -13,7 +13,7 @@ const BtnSessoesPerfil = ({ clicado, onClick, name, clicaImagem }: SessoesPerfil
     return (
         <div className={`area tablet:w-full border-b-4 items-center tablet:border-primary  tela:border-primary-dark tablet:flex ${clicado ? '' : 'tablet:hidden'}`}>
             <div >
-                <Image className={`h-16 cursor-pointer tela:hidden`} onClick={() => clicaImagem()} src="/icons/" alt="Imagem de voltar" width={64} height={64} />
+                <Image className={`h-16 cursor-pointer tela:hidden`} onClick={() => clicaImagem()} src="/icons/navigation-back-arrow-svgrepo-com.svg" alt="Imagem de voltar" width={64} height={64} />
             </div>
             <button onClick={() => onClick()} className={`${clicado == true ? "tela:bg-primary-dark" : "tela:bg-primary tablet:hidden tablet:bg-white"}  text-2xl w-full tablet:h-28 tela:h-40 link`}>{name}</button>
         </div>
