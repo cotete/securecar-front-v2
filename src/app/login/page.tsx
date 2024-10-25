@@ -8,7 +8,7 @@ export type Usuario = {
     Email: string;
     Senha: string;
     CPF: string;
-    Endereco: string;
+    Numero: string;
     CEP: string;
     Nascimento:string;
     Telefone: string;
@@ -19,13 +19,13 @@ const PaginaRegistroLogin = () => {
 
     const [conteudo, setConteudo] = useState('Cadastro')
 
-    function cadastrar(inputNome: string, inputEmail: string, inputSenha: string, inputCPF: string, inputEndereco: string, inputCEP: string, inputNascimento:string, inputTelefone: string):void {
+    function cadastrar(inputNome: string, inputEmail: string, inputSenha: string, inputCPF: string, inputNumero: string, inputCEP: string, inputNascimento:string, inputTelefone: string):void {
             const usuario: Usuario = {
                 Nome : inputNome,
                 Email: inputEmail,
                 Senha: inputSenha,
                 CPF: inputCPF,
-                Endereco : inputEndereco,
+                Numero : inputNumero,
                 CEP: inputCEP,
                 Nascimento: inputNascimento,
                 Telefone: inputTelefone
