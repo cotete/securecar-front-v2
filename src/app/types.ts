@@ -1,4 +1,4 @@
-export interface Carro {
+export type Carro={
     marca: string;
     modelo: string;
     placa: string;
@@ -7,3 +7,9 @@ export interface Carro {
     chassi: string;
     seguro:string;
 }
+
+export type CarroId ={
+    id_Carro:number;
+    id_usuario:number;
+    id_seguro:number;
+} & Carro
