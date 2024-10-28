@@ -2,11 +2,36 @@
 import { useState } from "react";
 import Botao from "@/components/Botao/Botao"; 
 import InputArea from "@/components/InputArea/InputArea";
+import { enderecoTipo } from "@/app/login/page";
 
 
 type FormRegistroProps = {
-  onSubmit: (inputNome: string, inputEmail: string, inputSenha: string, inputSenhaAux: string, inputCPF: string, inputEndereco: string, inputCEP: string,inputNascimento:string, inputTelefone: string) => void;
+  onSubmit: (inputNome: string, inputSenha: string, inputCPF: string, inputNascimento:string, contato: contato, endereco:enderecoTipo)=> Promise<void>;
+
 };
+
+export type contato= {
+  nr_ddi: string;
+  nr_ddd: string;
+  nr_telefone: string;
+  ds_email:string
+}
+
+type viacepTipo={
+  cep:string;
+  logradouro:string;
+  complemento:string;
+  unidade:string;
+  bairro:string;
+  localidade:string;
+  uf:string;
+  estado:string;
+  regiao:string;
+  ibge:string;
+  gia:string;
+  ddd:string;
+  siafi:string;
+}
 
 const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
 
@@ -27,7 +52,7 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
       if (!response.ok) {
           throw new Error(`Erro ao buscar CEP: ${response.statusText}`);
       }
-      const data = await response.json();
+      const data : viacepTipo = await response.json();
       console.log(data);
       return data;
   } catch (error) {
@@ -36,9 +61,16 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
   }
 
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    viaCep(inputCEP)
+    
+    const via = await viaCep(inputCEP)
+    if (!via) {
+      console.error("Erro ao obter o endereço com o CEP fornecido.");
+      return;
+    }
+    
+    
 
     
     function verificaEmail(inputEmail: string): boolean {
@@ -50,7 +82,27 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
       }
 
     if(inputSenhaAux == inputSenha && verificaEmail(inputEmail) && inputCEP.length==9 && inputCPF.length==11){
-        onSubmit(inputNome, inputEmail, inputSenha, inputSenhaAux, inputCPF, inputNumero, inputCEP,inputNascimento, inputTelefone);
+        const endereco:enderecoTipo = {
+          nr_cep: via.cep,
+          nm_logradouro:via.logradouro,
+          nr_logradouro:inputNumero,
+          nm_uf:via.uf,
+          nm_cidade:via.localidade,
+          nm_bairro:via.bairro
+
+        }
+        const ddi = inputTelefone.slice(0,3)
+        const ddd = inputTelefone.slice(3,6)
+        const numero = inputTelefone.slice(6)
+        const contato : contato = {
+          nr_ddi:ddi,
+          nr_ddd:ddd,
+          nr_telefone:numero,
+          ds_email:inputEmail
+        }
+
+        onSubmit(inputNome, inputSenha, inputCPF, inputNascimento, contato, endereco);
+        
         setInputNome("");
         setInputEmail("");
         setInputSenha("");
@@ -136,8 +188,10 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
           required={true}
           onChange={valor => setInputTelefone(valor)}
           label="Telefone"
-          placeHolder="Digite seu Telefone (somente números)"
+          placeHolder="Digite seu Telefone (DDIDDDXXXXXXXXX)"
+          pattern="/^\d{13}$/"
         />
+        <label className="font-semibold text-sm">Somente números</label>
         <div className="p-3 w-full flex items-center justify-center">
           <Botao tipo="submit">Cadastre-se</Botao>
         </div>
