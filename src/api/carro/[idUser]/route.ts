@@ -6,7 +6,7 @@ export async function GET(request: Request,{params}:{params:{idUser:number}}) {
     try {
         const res  = await fetch(`carro/${params.idUser}`);
         const data :CarroId  = await res.json(); 
-        return data;
+        return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao buscar carros do usuario", error);
         throw error; 

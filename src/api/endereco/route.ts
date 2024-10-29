@@ -9,7 +9,7 @@ export async function GET() {
     try {
         const res = await fetch(`Link-API`);
         const data: enderecoTipo[] = await res.json(); 
-        return data;
+        return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao buscar enderecos", error);
         throw error; 

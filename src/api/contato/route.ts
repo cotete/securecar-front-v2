@@ -10,7 +10,7 @@ export async function GET() {
     try {
         const res = await fetch(`Link-API`);
         const data: contato[] = await res.json(); 
-        return data;
+        return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao buscar contatos", error);
         throw error; 
