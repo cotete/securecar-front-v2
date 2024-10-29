@@ -1,11 +1,11 @@
-import { Carro } from "@/app/types";
+import { Carro, CarroId } from "@/app/types";
 import { useEffect, useRef } from "react";
 import FormAdicionarCarro from "../FormAdicionarCarro/FormAdicionarCarro";
 
 type ModalAdicionarCarro = {
     isOpen: boolean;
     children: React.ReactNode;
-    onAddCarro: (carro: Carro) => void;
+    onAddCarro: (carro: CarroId) => void;
 }
 
 const ModalAdicionarCarro = ({ isOpen, children, onAddCarro }: ModalAdicionarCarro) => {
@@ -29,7 +29,7 @@ const ModalAdicionarCarro = ({ isOpen, children, onAddCarro }: ModalAdicionarCar
     }, [isOpen]);
 
 
-    const handleCarroCadastrado = (carro: Carro) => {
+    const handleCarroCadastrado = (carro: CarroId) => {
         onAddCarro(carro);
         console.log(carro);
     };

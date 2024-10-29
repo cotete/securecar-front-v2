@@ -1,5 +1,5 @@
 
-import { Carro } from "@/app/types" 
+import { Carro, CarroId } from "@/app/types" 
 import ModalAdicionarCarro from "../ModalAdicionarCarro/ModalAdicionarCarro";
 import { useState } from "react"
 import Botao from "@/components/Botao/Botao"
@@ -7,7 +7,7 @@ import Image from "next/image"
 
 
 type btnAdicionarCarroProps ={
-    onAddCarro : (carro : Carro) => void
+    onAddCarro : (carro : CarroId) => void
 }
 
 const BtnAdicionarCarro = ({onAddCarro} : btnAdicionarCarroProps) =>{
@@ -15,7 +15,7 @@ const BtnAdicionarCarro = ({onAddCarro} : btnAdicionarCarroProps) =>{
     const[show,setShow] = useState(false)
 
     
-    const handleAddCarro = (carro :Carro) => {
+    const handleAddCarro = (carro :CarroId) => {
         onAddCarro(carro);
         setShow(false);
     
