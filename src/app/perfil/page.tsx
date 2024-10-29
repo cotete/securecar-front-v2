@@ -118,7 +118,7 @@ const perfil = ()=>{
     const conteudoChanger = () => {
         switch(conteudo){
             case 'Suas Configuracoes':
-                return <SuasConfiguracoes dataNascimento={user.Nascimento} nome={user.nm_usuario} cpf={user.nr_cpf} senha={user.ds_senha} email={contato.ds_email}/>
+                return <SuasConfiguracoes contato={contato} user={user} dataNascimento={user.Nascimento} nome={user.nm_usuario} cpf={user.nr_cpf} senha={user.ds_senha}/>
             case 'Acessibilidade':
                 return  <Acessibilidade onChangeFonte={changeFonte} onChangeModo={changeModo}/>
             case 'Endereco':
