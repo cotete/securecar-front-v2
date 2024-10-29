@@ -122,7 +122,7 @@ const perfil = ()=>{
             case 'Acessibilidade':
                 return  <Acessibilidade onChangeFonte={changeFonte} onChangeModo={changeModo}/>
             case 'Endereco':
-                return <Endereco nome={user.nm_usuario} cep={endProp.nr_cep} numero={endProp.nr_logradouro} cidade={endProp.nm_cidade} estado={endProp.nm_uf}/>
+                return <Endereco endereco={endProp} nome={user.nm_usuario} cep={endProp.nr_cep} numero={endProp.nr_logradouro} cidade={endProp.nm_cidade} estado={endProp.nm_uf}/>
             case 'Carros':
                 return <Carros usuario={user} listaCarro={listaCarro}/>
             case 'Consertos':

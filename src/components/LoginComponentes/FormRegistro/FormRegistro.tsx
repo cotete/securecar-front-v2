@@ -15,7 +15,7 @@ export type contato= {
   ds_email:string
 }
 
-type viacepTipo={
+export type viacepTipo={
   cep:string;
   logradouro:string;
   complemento:string;
