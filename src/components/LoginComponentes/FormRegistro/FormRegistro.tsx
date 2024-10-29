@@ -11,8 +11,6 @@ type FormRegistroProps = {
 };
 
 export type contato= {
-  nr_ddi: string;
-  nr_ddd: string;
   nr_telefone: string;
   ds_email:string
 }
@@ -89,15 +87,10 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
           nm_uf:via.uf,
           nm_cidade:via.localidade,
           nm_bairro:via.bairro
-
         }
-        const ddi = inputTelefone.slice(0,3)
-        const ddd = inputTelefone.slice(3,6)
-        const numero = inputTelefone.slice(6)
+
         const contato : contato = {
-          nr_ddi:ddi,
-          nr_ddd:ddd,
-          nr_telefone:numero,
+          nr_telefone:inputTelefone,
           ds_email:inputEmail
         }
 

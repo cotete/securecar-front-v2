@@ -1,10 +1,12 @@
+"use client";
 import InputArea from "@/components/InputArea/InputArea";
-import { useState } from "react";
-import { Carro } from "@/app/types";
+import { useEffect, useState } from "react";
+import { CarroId } from "@/app/types";
 import Botao from "@/components/Botao/Botao";
+import { FinalUser } from "@/api/usuario/route";
 
 type FormAdicionarCarro = {
-    onCarroCadastrado: (carro: Carro) => void;
+    onCarroCadastrado: (carro: CarroId) => void;
 }
 
 const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
@@ -15,10 +17,39 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
     const [quilometragem, setQuilometragem] = useState("")
     const [placa, setPlaca] = useState("")
     const [seguro, setSeguro] = useState("")
+    const [carro, setCarro] = useState<CarroId>({
+        id_Carro:0,
+        id_seguro:0,
+        id_usuario:0,
+        marca:"",
+        modelo:"",
+        ano:"",
+        placa:"",
+        quilometragem:"",
+        chassi:"",
+    })
+    const [user, setUser] = useState<FinalUser>({
+        nm_usuario:"",
+        ds_senha: "",
+        nr_cpf: "",
+        Nascimento: "",
+        id_endereco: 0,
+        id_contato: 0,
+        id_user:0
+    });
 
-    const onSave = (e: React.FormEvent<HTMLFormElement>) => {
+
+    useEffect(() => {
+
+        const userString  = sessionStorage.getItem("user");
+        if (userString) {
+            setUser(JSON.parse(userString));
+        }
+    }, []);
+
+    const onSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        const novoCarro = {
+        let novoCarro = {
             modelo,
             marca,
             ano,
@@ -27,6 +58,22 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             placa,
             seguro
         };
+        try{
+            const data = await fetch(`api/carros/${user.id_user}`,{
+                method:'POST',
+                headers:{
+                    "Content-Type": "application/json",
+                },body:JSON.stringify(novoCarro)
+            })
+            if(data.ok){
+                let car : CarroId = await data.json()
+                setCarro(car)
+            }else{
+                throw new Error("Erro ao Adicionar carro")
+            }
+        }catch(err){
+            console.error("Erro: ", err)
+        }
         setModelo("");
         setMarca("");
         setAno("");
@@ -35,7 +82,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
         setPlaca("");
         setSeguro("");
 
-        onCarroCadastrado(novoCarro);
+        onCarroCadastrado(carro);
     };
     return (
         <fieldset>

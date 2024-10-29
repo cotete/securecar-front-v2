@@ -1,12 +1,12 @@
 import { useState } from "react"
 
 import CarroModal from "../CarroModal/CarroModal"
-import { Carro } from "@/app/types";
+import { CarroId } from "@/app/types";
 
 type CarroCardProps = {
     nome : string;
-    carro : Carro;
-    removerCarro : (nome : string)=>void;
+    carro : CarroId;
+    removerCarro : (id : number)=>void;
 }
 
 

@@ -12,6 +12,7 @@ export type Usuario = {
     Nascimento:string;
     id_endereco?:number
     id_contato?:number
+    id_usuario?:number
 };
 
 export type enderecoTipo={
