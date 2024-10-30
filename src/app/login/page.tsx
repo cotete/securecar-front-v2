@@ -2,8 +2,8 @@
 import { useState } from "react"
 import FormLogin from "@/components/LoginComponentes/FormLogin/FormLogin"; 
 import FormRegistro, { contato } from "@/components/LoginComponentes/FormRegistro/FormRegistro"; 
-import { endFinalTipo } from "@/api/endereco/route";
-import { contatoFinal } from "@/api/contato/route";
+import { endFinalTipo } from "@/app/api/endereco/route";
+import { contatoFinal } from "@/app/api/contato/route";
 
 export type Usuario = {
     nm_usuario: string;

@@ -7,7 +7,7 @@ import { useState } from 'react';
 import AreaPerfil from '../AreaPerfil/AreaPerfil';
 import Image from 'next/image';
 import { Usuario } from '@/app/login/page';
-import { contatoFinal } from '@/api/contato/route';
+import { contatoFinal } from '@/app/api/contato/route';
 
 
 type SuasConfiguracoesProps ={

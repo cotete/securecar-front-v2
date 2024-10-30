@@ -5,7 +5,7 @@ import AreaPerfil from "../AreaPerfil/AreaPerfil";
 import { useState } from "react";
 import Botao from "@/components/Botao/Botao";
 import Image from "next/image";
-import { endFinalTipo } from "@/api/endereco/route";
+import { endFinalTipo } from "@/app/api/endereco/route";
 import { enderecoTipo } from "@/app/login/page";
 import { viacepTipo } from "@/components/LoginComponentes/FormRegistro/FormRegistro";
 

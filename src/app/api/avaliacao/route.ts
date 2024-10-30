@@ -23,23 +23,24 @@ export async function GET() {
 
 export async function POST(request:Request) {
     try {
-        const contato: avaliacoes = await request.json();
+        const avaliacoes: avaliacoes = await request.json();
 
         const res = await fetch("carro-Link-java",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",
             },
-            body: JSON.stringify(contato),
+            body: JSON.stringify(avaliacoes),
         })
         if(!res.ok){
-            throw new Error("Erro ao guardar carro")
+            throw new Error("Erro ao guardar avaliacao")
         }
         const data : avaliacoes = await res.json()
 
         return NextResponse.json(data)
     } catch (error) {
-        console.log("erro ao guardar carro", error);
-        throw error; 
+        console.log("erro ao guardar avaliacao", error);
+        return NextResponse.json({error:"PORRA DO KRL"})
+        
     }
 }

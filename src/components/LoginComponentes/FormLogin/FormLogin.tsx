@@ -4,7 +4,7 @@ import Botao from "@/components/Botao/Botao";
 import InputArea from "@/components/InputArea/InputArea"; 
 import { Usuario } from "@/app/login/page"; 
 import { useRouter } from "next/navigation";
-import { FinalUser } from "@/api/usuario/route";
+import { FinalUser } from "@/app/api/usuario/route";
 
 
 type FormLoginProps = {
@@ -21,7 +21,7 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
 
     useEffect(()=>{
         const chamaApi = async () => {
-            const res = await fetch("linkApiUsuario")
+            const res = await fetch("api/usuario")
             //tipar
             const data :FinalUser[] = await res.json()
             setListaUsers(data)

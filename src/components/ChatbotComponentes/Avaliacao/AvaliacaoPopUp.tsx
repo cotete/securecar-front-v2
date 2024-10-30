@@ -1,5 +1,5 @@
 "use client"
-import { avaliacoes, avaliacoesFinal } from "@/api/avaliacao/route";
+import { avaliacoes, avaliacoesFinal } from "@/app/api/avaliacao/route";
 import { Usuario } from "@/app/login/page";
 import {
     faFaceAngry,
@@ -31,7 +31,7 @@ import {
         vl_estrelas_feedback:avaliacao,
         id_usuario: usuario.id_usuario? usuario.id_usuario : 0
         }
-      const res = await fetch("api/avaliacao",{
+      const res = await fetch("http://localhost:3000/api/avaliacao",{
         method:"POST",
         headers:{
           "Content-Type": "application/json",
@@ -56,6 +56,7 @@ import {
     const agradecerFeedback = (avaliacao:number) => {
       setConteudoIframe(true)
       setAvaliacao(avaliacao)
+      postAvaliacao()
       setTimeout(() => {
         setConteudoIframe(false)
         onClose();

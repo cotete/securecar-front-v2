@@ -1,4 +1,4 @@
-import { consertoTipo } from '@/api/conserto/[idUser]/route';
+import { consertoTipo } from '@/app/api/conserto/[idUser]/route';
 import React from 'react'
 
 type DropDownProps ={

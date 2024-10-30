@@ -3,7 +3,7 @@ import InputArea from "@/components/InputArea/InputArea";
 import { useEffect, useState } from "react";
 import { CarroId } from "@/app/types";
 import Botao from "@/components/Botao/Botao";
-import { FinalUser } from "@/api/usuario/route";
+import { FinalUser } from "@/app/api/usuario/route";
 
 type FormAdicionarCarro = {
     onCarroCadastrado: (carro: CarroId) => void;
