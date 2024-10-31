@@ -41,7 +41,7 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
     }
 
     async function  guardarEndereco(end : enderecoTipo){
-        const res = await fetch(`api/endereco/${endereco.id_endereco}`,{
+        const res = await fetch(`api/endereco/${endereco.idEndereco}`,{
             method: "PUT",
             headers:{
             "Content-Type": "application/json",
@@ -53,28 +53,28 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
 
     async function aoSalvar(e : React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        if(cepValido){
-        const via = await viaCep(cepUser)
-        if (!via) {
-            console.error("Erro ao obter o endereço com o CEP fornecido.");
-            return;
-        }
-
-        const endereco:enderecoTipo = {
-            nr_cep: via.cep,
-            nm_logradouro:via.logradouro,
-            nr_logradouro:numeroUser,
-            nm_uf:via.uf,
-            nm_cidade:via.localidade,
-            nm_bairro:via.bairro
+        console.log(endereco)
+        
+        const via  = await viaCep(cepUser)
+        const {cep} = via!
+        cep.replace("-"," ")
+        const enderecoNovo:enderecoTipo = {
+            cep: cepUser,
+            nomeLogradouro:via!.logradouro,
+            numeroLogradouro:parseInt(numeroUser),
+            uf:via!.uf,
+            cidade:via!.localidade,
+            bairro:via!.bairro,
+            complemento:"insano"
           }
-        const res = await guardarEndereco(endereco)
+          console.log(enderecoNovo)
+        const res = await guardarEndereco(enderecoNovo)
         if(res.ok){
             alert("Endereco Atualizado com sucesso!")
         }else{
             alert("Falha ao atualizar o endereço")
         }
-    }
+    
 
     }
 
@@ -97,7 +97,7 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
               throw new Error(`Erro ao buscar CEP: ${response.statusText}`);
           }
           const data : viacepTipo = await response.json();
-          
+          console.log(data)
           return data;
       } catch (error) {
           console.error("Erro ao buscar o CEP:", error);
@@ -116,10 +116,10 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
                             <h2 className='text-3xl font-bold'>Endereço</h2>
                             <Image className='w-10 cursor-pointer' onClick={changeDisable} src="/icons/edit-svgrepo-com.svg" alt='Icone para mudar informações' height={40} width={40}/>
                         </div>
-                        <InputArea onChange={valor=>buscaCEP(valor)} max_length={8} label='Cep' required={true} placeHolder={cepUser} value={cepUser} disable={disable}></InputArea>
+                        <InputArea onChange={valor=>setCepUser(valor)} max_length={8} label='Cep' required={true} placeHolder={cepUser} value={cepUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setEstadoUser(valor)} label='Estado' required={true} placeHolder={estadoUser} value={estadoUser} disable={true}></InputArea>
                         <InputArea onChange={valor=>setCidadeUser(valor)} label='Cidade' required={true} placeHolder={cidadeUser} value={cidadeUser} disable={true}></InputArea>
-                        <InputArea onChange={valor=>setNumeroUser(valor)} label='Número' required={true} placeHolder={numeroUser} value={numeroUser} disable={true}></InputArea>
+                        <InputArea onChange={valor=>setNumeroUser(valor)} label='Número' required={true} placeHolder={numeroUser} value={numeroUser} disable={disable}></InputArea>
                         <div className='mt-3 w-full flex justify-end'>
                             <Botao tipo='submit'>Salvar Informações</Botao>
                         </div>
