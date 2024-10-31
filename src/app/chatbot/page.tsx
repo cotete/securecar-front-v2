@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Historico from "@/components/ChatbotComponentes/Historico/Historico"; 
 import { useEffect, useRef, useState } from "react";
@@ -7,10 +7,30 @@ import AvaliacaoPopup from "@/components/ChatbotComponentes/Avaliacao/AvaliacaoP
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
+import { Usuario } from "../login/page";
 
 
 const PaginaChatBot = ()=>{
     const listaMensagens : string[]=[];
+
+    const [user, setUser] = useState<Usuario>({
+        nm_usuario:"",
+        ds_senha: "",
+        nr_cpf: "",
+        Nascimento: "",
+        id_endereco: 0,
+        id_contato: 0,
+        id_usuario:0
+    });
+
+    useEffect(() => {
+
+        const userString  = sessionStorage.getItem("user");
+        if (userString) {
+            setUser(JSON.parse(userString));
+        }
+    }, []);
+
 
     const [mensagem,setMensagem] = useState("");
     const [mensagens,setMensagens] = useState<string[]>(listaMensagens);
@@ -86,7 +106,7 @@ const PaginaChatBot = ()=>{
                     </div>
                 </div>
             </div>
-            <AvaliacaoPopup isOpen={isOpen} onClose={fecharAvaliacao} />
+            <AvaliacaoPopup usuario={user} isOpen={isOpen} onClose={fecharAvaliacao} />
         </>
     )
 }

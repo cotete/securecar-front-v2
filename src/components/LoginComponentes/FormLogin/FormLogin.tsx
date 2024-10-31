@@ -4,7 +4,7 @@ import Botao from "@/components/Botao/Botao";
 import InputArea from "@/components/InputArea/InputArea"; 
 import { Usuario } from "@/app/login/page"; 
 import { useRouter } from "next/navigation";
-import { FinalUser } from "@/api/usuario/route";
+import { FinalUser } from "@/app/api/usuario/route";
 
 
 type FormLoginProps = {
@@ -15,16 +15,19 @@ type FormLoginProps = {
 const FormLogin = ({usuarios}: FormLoginProps)=>{
     const [inputCPF, setInputCPF] = useState("");
     const [inputSenha, setInputSenha] = useState("");
-    //criar tipo da lista
     const [listaUsers,setListaUsers] = useState<Usuario[]>();
     const nav = useRouter();
 
     useEffect(()=>{
         const chamaApi = async () => {
-            const res = await fetch("linkApiUsuario")
-            //tipar
-            const data :FinalUser[] = await res.json()
+            try{
+            const res = await fetch("api/usuario")
+            const data :Usuario[] = await res.json()
             setListaUsers(data)
+            
+        }catch (error) {
+            console.error("Erro ao buscar usuários:", error);
+        }
         }
         chamaApi()
     },[])
@@ -33,11 +36,17 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
 
     const validar = (e: React.FormEvent<HTMLFormElement>) : void =>{
         e.preventDefault();
+        console.log(listaUsers)
+        if (!listaUsers) {
+            console.log("Usuários ainda não foram carregados.");
+            return;
+        }
         if(listaUsers != undefined){
         let usuarioAchado = false;
         for(let x = 0; x < listaUsers.length; x++){
-            let user = usuarios[x];
-            if(user.nr_cpf === inputCPF && user.ds_senha === inputSenha){
+            let user = listaUsers[x];
+            console.log(user)
+            if(user.cpf === inputCPF && user.senha === inputSenha){
                 sessionStorage.setItem("user", JSON.stringify(user));
                 setInputCPF("");
                 setInputSenha("");

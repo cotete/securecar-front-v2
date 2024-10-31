@@ -3,12 +3,12 @@ import { contato } from "@/components/LoginComponentes/FormRegistro/FormRegistro
 import { NextResponse } from "next/server";
 
 export type contatoFinal={
-    id_contato:number
+    idContato:number
 } & contato
 
 export async function GET() {
     try {
-        const res = await fetch(`Link-API`);
+        const res = await fetch(`http://localhost:8080/contato`);
         const data: contato[] = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
@@ -21,7 +21,7 @@ export async function POST(request:Request) {
     try {
         const contato: contato = await request.json();
 
-        const res = await fetch("contato-Link-java",{
+        const res = await fetch("http://localhost:8080/contato",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",

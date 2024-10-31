@@ -1,4 +1,6 @@
 "use client"
+import { avaliacoes, avaliacoesFinal } from "@/app/api/avaliacao/route";
+import { Usuario } from "@/app/login/page";
 import {
     faFaceAngry,
     faFaceMeh,
@@ -8,17 +10,53 @@ import {
   } from "@fortawesome/free-solid-svg-icons";
   // import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons/faFaceLaughWink";
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-  import { useState } from "react";
+  import { useEffect, useState } from "react";
   
   export type PopupProps = {
     isOpen: boolean;
     onClose: () => void;
+    usuario: Usuario
   };
-  const AvaliacaoPopup = ({ isOpen, onClose }: PopupProps) => {
+
+  const AvaliacaoPopup = ({ usuario, isOpen, onClose }: PopupProps) => {
+
+
+  const [avaliacao,setAvaliacao] = useState(0);
+
+
+  const postAvaliacao = async ()=>{
+    try{
+      let avaliacaoPost :avaliacoes = {
+        ds_feedback:"",
+        vl_estrelas_feedback:avaliacao,
+        id_usuario: usuario.id_usuario? usuario.id_usuario : 0
+        }
+      const res = await fetch("http://localhost:3000/api/avaliacao",{
+        method:"POST",
+        headers:{
+          "Content-Type": "application/json",
+        },
+        body:JSON.stringify(avaliacaoPost)
+      })
+      if(!res.ok){
+        throw new Error("Erro ao postar a avaliação")
+      }
+      return res.ok
+    }catch(err){
+      console.error("Erro ao postar a avaliação", err)
+    }
+  }
+
+
+
+
+
     const [conteudoIframe, setConteudoIframe] = useState(false)
     if (!isOpen) return null;
-    const agradecerFeedback = () => {
+    const agradecerFeedback = (avaliacao:number) => {
       setConteudoIframe(true)
+      setAvaliacao(avaliacao)
+      postAvaliacao()
       setTimeout(() => {
         setConteudoIframe(false)
         onClose();
@@ -49,19 +87,19 @@ import {
           </p>
           
           <div className="flex gap-4 w-max py-4">
-            <button onClick={agradecerFeedback}>
+            <button onClick={()=>agradecerFeedback(1)}>
               <FontAwesomeIcon
                 className="h-16 text-white hover:text-red-500 hover:scale-105 transition-all duration-500"
                 icon={faFaceAngry}
               />
             </button>
-            <button onClick={agradecerFeedback}>
+            <button onClick={()=>agradecerFeedback(2)}>
               <FontAwesomeIcon
                 className="h-16 text-white hover:text-gray-500 hover:scale-105 transition-all duration-500"
                 icon={faFaceMeh}
               />
             </button>
-            <button onClick={agradecerFeedback}>
+            <button onClick={()=>agradecerFeedback(3)}>
               <FontAwesomeIcon
                 className="h-16 text-white hover:text-green-500 hover:scale-105 transition-all duration-500"
                 icon={faFaceLaughWink}

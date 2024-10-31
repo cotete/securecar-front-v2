@@ -3,7 +3,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(request: Request,{params}:{params:{idUser:number}}) {
     try {
-        const res  = await fetch(`usuario/${params.idUser}`);
+        const res  = await fetch(`http://localhost:8080/usuario/${params.idUser}`);
         const data :Usuario  = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
@@ -15,7 +15,7 @@ export async function GET(request: Request,{params}:{params:{idUser:number}}) {
 export async function PUT(request: Request,{params}:{params:{idUser:number}}) {
     try {
         const user : Usuario = await request.json();
-        const res = await fetch(`linkJava/${params.idUser}`,{
+        const res = await fetch(`http://localhost:8080/usuario/${params.idUser}`,{
             method:'PUT',
             headers:{
                 "Content-Type": "application/json",

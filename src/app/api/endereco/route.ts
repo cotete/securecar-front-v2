@@ -2,12 +2,12 @@ import { enderecoTipo } from "@/app/login/page";
 import { NextResponse } from "next/server";
 
 export type endFinalTipo={
-    id_endereco:number
+    idEndereco:number
 } & enderecoTipo
 
 export async function GET() {
     try {
-        const res = await fetch(`Link-API`);
+        const res = await fetch(`http://localhost:8080/endereco`);
         const data: enderecoTipo[] = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
@@ -19,8 +19,8 @@ export async function GET() {
 export async function POST(request:Request) {
     try {
         const endereco: enderecoTipo = await request.json();
-
-        const res = await fetch("Endereco-Link-java",{
+        console.log(endereco)
+        const res = await fetch("http://localhost:8080/endereco",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",

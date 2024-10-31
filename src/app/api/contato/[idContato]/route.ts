@@ -3,7 +3,7 @@ import { contatoFinal } from "../route";
 
 export async function GET(request: Request,{params}:{params:{idContato:number}}) {
     try {
-        const res  = await fetch(`carro/${params.idContato}`);
+        const res  = await fetch(`http://localhost:8080/contato/${params.idContato}`);
         const data :contatoFinal  = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
@@ -15,7 +15,7 @@ export async function GET(request: Request,{params}:{params:{idContato:number}})
 export async function PUT(request: Request,{params}:{params:{idContato:number}}) {
     try {
         const contato : contatoFinal = await request.json();
-        const res = await fetch(`linkJava/${params.idContato}`,{
+        const res = await fetch(`http://localhost:8080/contato/${params.idContato}`,{
             method:'PUT',
             headers:{
                 "Content-Type": "application/json",

@@ -11,7 +11,7 @@ export type FinalUser = {
 
 export async function GET() {
     try {
-        const res = await fetch(`Link-API`);
+        const res = await fetch(`http://localhost:8080/usuario`);
         const data: Usuario[] = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
@@ -23,8 +23,8 @@ export async function GET() {
 export async function POST(request:Request) {
     try {
         const usuario: Usuario = await request.json();
-
-        const res = await fetch("usuario-Link-java",{
+        console.log(usuario)
+        const res = await fetch("http://localhost:8080/usuario",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",

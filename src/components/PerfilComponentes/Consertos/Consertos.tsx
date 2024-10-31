@@ -1,7 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react'
 import PecasLista, { pecasTipo } from '../PecasLista/PecasLista';
-import { consertoTipo } from '@/api/conserto/[idUser]/route';
+import { consertoTipo } from '@/app/api/conserto/[idUser]/route';
 import DropDownConserto from './DropDownConserto/DropDownConserto';
 
 
