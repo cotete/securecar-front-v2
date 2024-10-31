@@ -6,22 +6,24 @@ import { endFinalTipo } from "@/app/api/endereco/route";
 import { contatoFinal } from "@/app/api/contato/route";
 
 export type Usuario = {
-    nm_usuario: string;
-    ds_senha: string;
-    nr_cpf: string;
-    Nascimento:string;
-    id_endereco?:number
-    id_contato?:number
-    id_usuario?:number
+    nomeUsuario: string;
+    senha: string;
+    cpf: string;
+    genero:string;
+    rg:string;
+    idEndereco?:number
+    idContato?:number
+    idUsuario?:number
 };
 
 export type enderecoTipo={
-    nr_cep:string
-    nm_logradouro:string
-    nr_logradouro:string
-    nm_uf:string
-    nm_cidade:string,
-    nm_bairro:string
+    cep:string
+    nomeLogradouro:string
+    numeroLogradouro:number
+    uf:string
+    cidade:string,
+    bairro:string
+    complemento?:string;
 }
 
 const lista_user: Usuario[] = []
@@ -30,7 +32,7 @@ const PaginaRegistroLogin = () => {
     const [conteudo, setConteudo] = useState('Cadastro')
 
     async function  guardarEndereco(endereco:enderecoTipo){
-        const res = await fetch("Endereco-Link",{
+        const res = await fetch("api/endereco",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",
@@ -40,7 +42,7 @@ const PaginaRegistroLogin = () => {
         return res
     }
     async function  guardarUser(user:Usuario){
-        const res = await fetch("user-Link",{
+        const res = await fetch("api/usuario",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",
@@ -50,7 +52,7 @@ const PaginaRegistroLogin = () => {
         return res
     }
     async function  guardarContato(contato:contato){
-        const res = await fetch("contato-Link",{
+        const res = await fetch("api/contato",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",
@@ -60,21 +62,25 @@ const PaginaRegistroLogin = () => {
         return res
     }
 
-    async function cadastrar(inputNome: string, inputSenha: string, inputCPF: string, inputNascimento:string, contato: contato, endereco:enderecoTipo): Promise<void> {
+    async function cadastrar(inputNome: string, inputSenha: string, inputCPF: string, inputNascimento:string, contato: contato, endereco:enderecoTipo , inputRG:string,inputGenero:string): Promise<void> {
+
             const usuario: Usuario = {
-                nm_usuario : inputNome,
-                ds_senha: inputSenha,
-                nr_cpf: inputCPF,
-                Nascimento: inputNascimento,
+                nomeUsuario : inputNome,
+                senha: inputSenha,
+                cpf: inputCPF,
+                genero:inputGenero,
+                rg:inputRG
             };
             const resVia  = await guardarEndereco(endereco)
             const resCont = await guardarContato(contato)
             const endRes : endFinalTipo = await resVia.json();
             const endCont : contatoFinal = await resCont.json();
+            console.log(endRes)
+            console.log(endCont)
             //fazer do contato
             if(resCont.ok && resVia.ok ){
-                usuario['id_endereco']=endRes.id_endereco
-                usuario['id_contato']= endCont.id_contato
+                usuario['idEndereco']=endRes.idEndereco
+                usuario['idContato']= endCont.idContato
                 const resUser = await guardarUser(usuario)
                 lista_user.push(usuario)
                 console.log(usuario)
