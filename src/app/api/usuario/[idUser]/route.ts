@@ -21,7 +21,9 @@ export async function PUT(request: Request,{params}:{params:{idUser:number}}) {
                 "Content-Type": "application/json",
             },body:JSON.stringify(user)
         })
-        return res.ok;
+        const data :Usuario  = await res.json(); 
+        console.log(data)
+        return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao editar usuario", error);
         throw error; 

@@ -22,7 +22,7 @@ type SuasConfiguracoesProps ={
 const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha} : SuasConfiguracoesProps)=>{
 
     const [nomeUser, setNomeUser] = useState(nome);
-    const [telefoneUser, setTelefoneUser] = useState(contato.telefone);
+    const [telefoneUser, setTelefoneUser] = useState<string>(contato.telefone);
     const [cpfUser, setCpfUser] = useState(cpf);
     const [senhaUser, setSenhaUser] = useState(senha);
     const [emailUser, setEmailUser] = useState(contato.email);
@@ -31,17 +31,18 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha} : SuasC
 
     async function aoSalvar(e : React.FormEvent<HTMLFormElement>){
         e.preventDefault()
-        if(telefoneUser.length == 11 && telefoneUser !="" && cpfUser.length == 11 && senhaUser != "" && emailUser != "" && emailUser.includes('@')){
-        const InfosAtt : Usuario={
-            nomeUsuario: nomeUser,
-            cpf : cpfUser,
-            senha : senhaUser,
-            rg : dataNascimentoUser,
-            genero:user.genero,
-            idContato: user.idContato,
-            idEndereco:user.idEndereco,
-            idUsuario:user.idUsuario 
-        };
+        console.log(telefoneUser,cpfUser,senhaUser,emailUser)
+        if(String(telefoneUser).length == 11 && telefoneUser !="" && senhaUser != "" && emailUser != "" && emailUser.includes('@')){
+            const InfosAtt : Usuario={
+                nomeUsuario: nomeUser,
+                cpf : cpfUser,
+                senha : senhaUser,
+                rg : dataNascimentoUser,
+                genero:user.genero,
+                idContato: user.idContato,
+                idEndereco:user.idEndereco,
+                idUsuario:user.idUsuario 
+            };
         const cttAtt : contatoFinal={
             idContato: contato.idContato,
             telefone: telefoneUser,
@@ -96,7 +97,7 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha} : SuasC
                         <InputArea onChange={valor=>setSenhaUser(valor)} label='Senha' required={true} placeHolder={senha} value={senhaUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setTelefoneUser(valor)} label='Numero' required={true} placeHolder={contato.telefone} value={telefoneUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setCpfUser(valor)} label='Cpf' required={true} placeHolder={cpf} value={cpfUser} disable={true}></InputArea>
-                        <InputArea onChange={valor=>setDataNascimentoUser(valor)} label='Data de Nascimento' required={true} placeHolder={dataNascimento} value={dataNascimentoUser} disable={true}></InputArea>
+                        <InputArea onChange={valor=>setDataNascimentoUser(valor)} label='RG' required={true} placeHolder={dataNascimento} value={dataNascimentoUser} disable={true}></InputArea>
                         <div className='mt-3 w-full flex justify-end'>
                             <Botao tipo='submit'>Salvar Informações</Botao>
                         </div>
