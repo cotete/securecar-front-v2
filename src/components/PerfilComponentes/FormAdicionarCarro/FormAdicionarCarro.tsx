@@ -50,18 +50,18 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
 
     const onSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        const quilo = parseFloat(quilometragem)
         let novoCarro = {
             modelo,
-            marca,
             ano,
             chassi,
-            quilometragem,
+            "quilometragem":quilo,
             placa,
             idUsuario:user.idUsuario,
             idSeguro:1
         };
         try{
-            const data = await fetch(`api/carro/${user.idUsuario}`,{
+            const data = await fetch(`api/carro/`,{
                 method:'POST',
                 headers:{
                     "Content-Type": "application/json",
@@ -112,6 +112,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                 <InputArea
                     value={chassi}
                     required={true}
+                    max_length={17}
                     onChange={valor => setChassi(valor)}
                     label="Chassi"
                     placeHolder="Digite o Chassi do seu carro aqui" />
@@ -127,7 +128,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                     required={true}
                     onChange={valor => setPlaca(valor)}
                     label="Placa"
-                    max_length={7}
+                    max_length={8}
                     placeHolder="Digite a Placa do seu carro aqui" />
                 <InputArea
                     value={seguro}
