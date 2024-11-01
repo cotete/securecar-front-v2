@@ -1,7 +1,6 @@
 "use client";
 import { contatoFinal } from "@/app/api/contato/route";
 import { endFinalTipo } from "@/app/api/endereco/route";
-import { FinalUser } from "@/app/api/usuario/route";
 import Acessibilidade from "@/components/PerfilComponentes/Acessibilidade/Acessibilidade";
 import BtnSessoesPerfil from "@/components/PerfilComponentes/BtnSessoesPerfil/BtnSessoesPerfil";
 import Carros from "@/components/PerfilComponentes/Carros/Carros";

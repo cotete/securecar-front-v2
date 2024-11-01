@@ -1,21 +1,12 @@
 import { Carro, CarroId } from "@/app/types";
 import { NextResponse } from "next/server";
 
-export async function GET(request: Request,{params}:{params:{idUser:number,idCarro:number}}) {
-    try {
-        const res  = await fetch(`carro/${params.idUser}/${params.idCarro}`);
-        const data :CarroId  = await res.json(); 
-        return NextResponse.json(data);
-    } catch (error) {
-        console.log("erro ao buscar carro", error);
-        throw error; 
-    }
-}
+
 
 export async function PUT(request: Request,{params}:{params:{idUser:number,idCarro:number}}) {
     try {
         const carro : CarroId = await request.json();
-        const res = await fetch(`linkJava/${params.idUser}/${params.idCarro}`,{
+        const res = await fetch(`http://localhost:8080/carro/${params.idUser}/${params.idCarro}`,{
             method:'PUT',
             headers:{
                 "Content-Type": "application/json",

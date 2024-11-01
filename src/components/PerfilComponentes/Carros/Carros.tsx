@@ -19,14 +19,14 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
 
    
     const [carros, setCarros] = useState<CarroId[]>([{
-        id_carro:0,
-        id_seguro:0,
-        id_usuario:0,
-        nm_modelo:"",
-        nr_ano:"",
-        nr_placa:"",
-        km_carro:"",
-        ds_chassi:""
+        idCarro:0,
+        idSeguro:0,
+        idUsuario:0,
+        modelo:"",
+        ano:"",
+        placa:"",
+        quilometragem:"",
+        chassi:""
     }]);
 
     const adicionarLista = (carro : CarroId) => {
@@ -36,7 +36,7 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
     };
 
     const removerCarro = async (id: number) => {
-        const novosCarros = carros.filter(carro => carro.id_carro !== id);
+        const novosCarros = carros.filter(carro => carro.idCarro !== id);
         setCarros(novosCarros); 
  
     }
@@ -44,7 +44,7 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
     useEffect(()=>{
         const chamadaAPI = async () => {
             try{
-            const res = await fetch(`/api/carro/${usuario.id_usuario}`)
+            const res = await fetch(`/api/carro/${usuario.idUsuario}`)
             if(res.ok){
                 const data : CarroId[] = await res.json()
                 setCarros(data)
@@ -70,7 +70,7 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
                 <BtnAdicionarCarro onAddCarro={adicionarLista}/> 
                 </div>
                 <div className="flex flex-row gap-1	">
-                    {carros.map(carro =><CarroCard removerCarro={removerCarro} key={carro.nm_modelo} carro = {carro} nome = {carro.nm_modelo}/>)} 
+                    {carros.map(carro =><CarroCard removerCarro={removerCarro} key={carro.modelo} carro = {carro} nome = {carro.modelo}/>)} 
                 </div>
             </div>
         </div>:

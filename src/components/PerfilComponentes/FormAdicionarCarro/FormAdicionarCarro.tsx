@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { CarroId } from "@/app/types";
 import Botao from "@/components/Botao/Botao";
 import { FinalUser } from "@/app/api/usuario/route";
+import { Usuario } from "@/app/login/page";
 
 type FormAdicionarCarro = {
     onCarroCadastrado: (carro: CarroId) => void;
@@ -18,24 +19,24 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
     const [placa, setPlaca] = useState("")
     const [seguro, setSeguro] = useState("")
     const [carro, setCarro] = useState<CarroId>({
-        id_Carro:0,
-        id_seguro:0,
-        id_usuario:0,
-        marca:"",
+        idCarro:0,
+        idSeguro:0,
+        idUsuario:0,
         modelo:"",
         ano:"",
         placa:"",
         quilometragem:"",
         chassi:"",
     })
-    const [user, setUser] = useState<FinalUser>({
-        nm_usuario:"",
-        ds_senha: "",
-        nr_cpf: "",
-        Nascimento: "",
-        id_endereco: 0,
-        id_contato: 0,
-        id_user:0
+    const [user, setUser] = useState<Usuario>({
+        nomeUsuario:"",
+        senha: "",
+        cpf: "",
+        rg: "",
+        genero:"",
+        idEndereco: 0,
+        idContato: 0,
+        idUsuario:0
     });
 
 
@@ -56,10 +57,11 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             chassi,
             quilometragem,
             placa,
-            seguro
+            idUsuario:user.idUsuario,
+            idSeguro:1
         };
         try{
-            const data = await fetch(`api/carros/${user.id_user}`,{
+            const data = await fetch(`api/carro/${user.idUsuario}`,{
                 method:'POST',
                 headers:{
                     "Content-Type": "application/json",

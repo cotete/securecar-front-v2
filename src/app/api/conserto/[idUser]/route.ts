@@ -10,7 +10,7 @@ export type consertoTipo = {
 
 export async function GET(request: Request,{params}:{params:{idUser:number}}) {
     try {
-        const res = await fetch(`Link-API/${params.idUser}`);
+        const res = await fetch(`http://localhost:8080/conserto/${params.idUser}`);
         const data: consertoTipo[] = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
