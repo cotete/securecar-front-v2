@@ -64,12 +64,11 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
     }
   };
 
-  // Função de máscara para CPF
 const maskCPF = (value: string): string => {
   return value
-    .replace(/\D/g, '') // Remove tudo que não é dígito
-    .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após os três primeiros dígitos
-    .replace(/(\d{3})(\d)/, '$1.$2') // Adiciona ponto após os seis dígitos
+    .replace(/\D/g, '')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2') 
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
 };
 
@@ -87,9 +86,12 @@ const maskCEP = (value: string): string => {
     .replace(/(\d{5})(\d{3})$/, '$1-$2');
 };
 
-// Função de máscara para RG
 const maskRG = (value: string): string => {
-  return value.replace(/\D/g, '');
+  return value
+    .replace(/\D/g, '')
+    .replace(/(\d{2})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d{1})$/, '$1-$2'); 
 };
 
 
@@ -137,7 +139,6 @@ const maskRG = (value: string): string => {
         inputGenero
       );
 
-      // Limpar os campos após o envio
       setInputNome("");
       setInputEmail("");
       setInputSenha("");
@@ -196,14 +197,13 @@ const maskRG = (value: string): string => {
           placeHolder="Digite seu CPF (XXX.XXX.XXX-XX)"
           max_length={14}
         />
-
-        <InputArea
+       <InputArea
           value={inputRG}
           required={true}
           onChange={(valor: string) => setInputRG(maskRG(valor))}
           label="RG"
           placeHolder="Digite seu RG (somente números)"
-          max_length={9}
+          max_length={12}
         />
         <InputArea
           value={inputNumero}
