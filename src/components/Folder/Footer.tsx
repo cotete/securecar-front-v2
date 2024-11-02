@@ -1,6 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
-
+import logoPorto from "../../../public/img/logo_porto.svg";
+import github from "../../../public/icons/github.svg";
 const Footer = () => {
 
   return (
@@ -12,14 +13,14 @@ const Footer = () => {
       <p className="text-white text-center text-sm font-bold my-4">&copy; 2024 SecureCar</p>
       <hr className="border-t-2 border-[#6ea6e8] py-4 w-full" ></hr>
       <div className="w-full flex gap-4 justify-between items-center celular:flex-col">
-      <Link href="/" ><Image src="/img/logo_porto.svg" className="h-[40px] hover:scale-110 transition brightness-0 saturate-100 invert" alt="Logo" height={40} width={100} objectFit="contain" /></Link>
+      <Link href="/" ><Image src={logoPorto} className="h-[40px] hover:scale-110 transition brightness-0 saturate-100 invert" alt="Logo" height={40} width={100} objectFit="contain" /></Link>
       <div className="flex gap-4 justify-between items-center celular:flex-col celular:justify-center celular:items-center celular:m-auto">
         <Link className="text-white celular:text-xl celular:py-1 hover:scale-110 transition hover:text-black font-semibold text-sm" href="/blog">Novidades</Link>
         <Link className="text-white celular:text-xl celular:py-1 hover:scale-110 transition hover:text-black font-semibold text-sm" href="/help">Help</Link>
         <Link className="text-white celular:text-xl celular:py-1 hover:scale-110 transition hover:text-black font-semibold text-sm" href="/participantes">Quem Somos</Link>
       </div>
       <div className="celular:w-full celular:justify-center flex items-center justify-end w-[172px] gap-4">
-        <a className="hover:scale-125 transition-all duration-300" href="https://github.com/securecar/SecureCar-Front-Vite-TS-React"><Image src="/icons/github.svg" alt="Github da nossa equipe" height={40} width={40} /></a>
+        <a className="hover:scale-125 transition-all duration-300" href="https://github.com/securecar/SecureCar-Front-Vite-TS-React"><Image src={github} alt="Github da nossa equipe" height={40} width={40} /></a>
         {/* <a href="https://linkedin.com/in/gustavodiasdsc"><img src={linkedinLogo} alt="Linkedin da nossa equipe" /></a> */}
       </div>
       </div>

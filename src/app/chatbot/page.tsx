@@ -9,7 +9,7 @@ import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { Usuario } from "../login/page";
 import Watson from "@/components/Watson/Watson";
-
+import sendArrow from "../../../public/icons/send.svg";
 
 const PaginaChatBot = ()=>{
     const listaMensagens : string[]=[];
@@ -129,8 +129,7 @@ const PaginaChatBot = ()=>{
                             <input className="w-11/12 p-3 outline-none placeholder:text-2xl placeholder:font-medium placeholder:text-black mr-2 just" value={mensagem} onChange={valor =>setMensagem(valor.target.value)} type="text" placeholder="Digite aqui" />
                         </form>
                         <div className=" flex justify-center items-center cursor-pointer hover:scale-105 transition-all duration-300 w-1/12 p-1">
-                            <Watson/>
-                            <Image className="w-full h-10" height={40} width={40} onClick={enviarMsgClick} src={"/icons/send.svg"} alt="Imagem de enviar mensagem" />
+                            <Image className="w-full h-10" height={40} width={40} onClick={enviarMsgClick} src={sendArrow} alt="Imagem de enviar mensagem" />
                         </div>
                     </div>
                 </div>

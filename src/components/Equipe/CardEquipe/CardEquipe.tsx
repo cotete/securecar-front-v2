@@ -1,5 +1,6 @@
 import Image from "next/image"
-
+import linkedin from "../../../../public/icons/linkedin.svg";
+import github from "../../../../public/icons/github.svg";
 
 export type CardEquipeProps = {
     foto : string,
@@ -14,10 +15,10 @@ const CardEquipe = ({foto, nome, linkLinkedin, linkGitHub} : CardEquipeProps) =>
         <p className="text-2xl font-medium text-center">{nome}</p>
         <div className="flex justify-evenly">
             <a href={linkLinkedin} target="_blank" rel="noreferrer">
-                <Image className="h-10 invert" src="/icons/linkedin.svg" alt="Logo do LinkedIn" height={40} width={40}/>
+                <Image className="h-10 invert" src={linkedin} alt="Logo do LinkedIn" height={40} width={40}/>
             </a>
             <a href={linkGitHub} target="_blank" rel="noreferrer">
-                <Image className="h-10 invert" src="/icons/github.svg" alt="Logo do GitHub" height={40} width={40} />
+                <Image className="h-10 invert" src={github} alt="Logo do GitHub" height={40} width={40} />
             </a>
         </div>
 

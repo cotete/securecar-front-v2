@@ -8,7 +8,7 @@ import AreaPerfil from '../AreaPerfil/AreaPerfil';
 import Image from 'next/image';
 import { Usuario } from '@/app/login/page';
 import { contatoFinal } from '@/app/api/contato/route';
-
+import editar from "../../../../public/icons/edit-svgrepo-com.svg";
 
 type SuasConfiguracoesProps ={
     nome:string;
@@ -87,7 +87,7 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha,changeMo
                     <form className='mt-6 flex flex-col' action="./" onSubmit={aoSalvar}>
                         <div className='w-full flex justify-between'>
                             <h2 className='text-3xl font-bold'>Informações</h2>
-                            <Image className='w-10 cursor-pointer' onClick={changeDisable} src='/icons/edit-svgrepo-com.svg' alt='Icone para mudar informações' height={40} width={40}/>
+                            <Image className='w-10 cursor-pointer' onClick={changeDisable} src={editar} alt='Icone para mudar informações' height={40} width={40}/>
                         </div>
                         <InputArea onChange={valor=>setNomeUser(valor)} label='Nome' required={true} placeHolder={nome} value={nomeUser} disable={true}></InputArea>
                         <InputArea onChange={valor=>setEmailUser(valor)} label='Email' required={true} placeHolder={contato.email} value={emailUser} disable={disable}></InputArea>
