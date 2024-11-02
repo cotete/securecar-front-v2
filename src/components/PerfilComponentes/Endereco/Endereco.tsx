@@ -8,7 +8,7 @@ import Image from "next/image";
 import { endFinalTipo } from "@/app/api/endereco/route";
 import { enderecoTipo } from "@/app/login/page";
 import { viacepTipo } from "@/components/LoginComponentes/FormRegistro/FormRegistro";
-
+import editar from "../../../../public/icons/edit-svgrepo-com.svg";
 type EnderecoProps = {
     nome : string;
     cep : string;
@@ -114,7 +114,7 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
                     <form className='mt-6 flex flex-col' action="./" onSubmit={aoSalvar}>
                     <div className='w-full flex justify-between'>
                             <h2 className='text-3xl font-bold'>Endereço</h2>
-                            <Image className='w-10 cursor-pointer' onClick={changeDisable} src="/icons/edit-svgrepo-com.svg" alt='Icone para mudar informações' height={40} width={40}/>
+                            <Image className='w-10 cursor-pointer' onClick={changeDisable} src={editar} alt='Icone para mudar informações' height={40} width={40}/>
                         </div>
                         <InputArea onChange={valor=>setCepUser(valor)} max_length={8} label='Cep' required={true} placeHolder={cepUser} value={cepUser} disable={disable}></InputArea>
                         <InputArea onChange={valor=>setEstadoUser(valor)} label='Estado' required={true} placeHolder={estadoUser} value={estadoUser} disable={true}></InputArea>
