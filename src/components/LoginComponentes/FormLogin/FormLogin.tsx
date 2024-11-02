@@ -11,7 +11,14 @@ type FormLoginProps = {
     usuarios: Usuario[]; 
   };
 
-
+const maskCPF = (value: string): string => {
+    return value
+    .replace(/\D/g, '')
+    .replace(/(\d{3})(\d)/, '$1.$2')
+    .replace(/(\d{3})(\d)/, '$1.$2') 
+    .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
+};
+  
 const FormLogin = ({usuarios}: FormLoginProps)=>{
     const [inputCPF, setInputCPF] = useState("");
     const [inputSenha, setInputSenha] = useState("");
@@ -68,9 +75,10 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
                 <InputArea
                 value={inputCPF}
                 required={true}
-                onChange={valor => setInputCPF(valor)}
+                onChange={(valor: string) => setInputCPF(maskCPF(valor))}
                 label="CPF"
-                placeHolder="Digite seu CPF"
+                placeHolder="Digite seu CPF (XXX.XXX.XXX-XX)"
+                max_length={14}
                 />
                 <InputArea
                 value={inputSenha}
