@@ -2,8 +2,8 @@ import Equipe from "@/components/Equipe/Equipe";
 import Carousel from "@/components/TesteEquipe/TestemunhosCarrousel";
 import ListaDeTestemunhos from "@/components/Testemunhos/lista_testemunhos";
 import Image from "next/image";
-import help from "../../public/img/help.webp"
-import guincho from "../../public/img/porto-guincho.webp"
+import help from "../../public/img/help.webp";
+import guincho from "../../public/img/porto-guincho.webp";
 
 export default function Home() {
   return (
