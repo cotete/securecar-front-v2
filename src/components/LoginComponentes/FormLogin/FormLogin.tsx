@@ -39,7 +39,9 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
         chamaApi()
     },[])
 
-
+    const removeMaskCPF = (value: string): string => {
+        return value.replace(/\D/g, ''); // Remove tudo que não é número
+      };
 
     const validar = (e: React.FormEvent<HTMLFormElement>) : void =>{
         e.preventDefault();
@@ -48,12 +50,13 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
             console.log("Usuários ainda não foram carregados.");
             return;
         }
+        const cleanedCPF = removeMaskCPF(inputCPF);
         if(listaUsers != undefined){
         let usuarioAchado = false;
         for(let x = 0; x < listaUsers.length; x++){
             let user = listaUsers[x];
             console.log(user)
-            if(user.cpf === inputCPF && user.senha === inputSenha){
+            if(user.cpf === cleanedCPF && user.senha === inputSenha){
                 sessionStorage.setItem("user", JSON.stringify(user));
                 setInputCPF("");
                 setInputSenha("");
