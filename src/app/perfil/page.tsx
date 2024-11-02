@@ -24,7 +24,7 @@ const perfil = () => {
     const [carros, setCarros] = useState<boolean>()
     const [endereco, setEndereco] = useState<boolean>()
     const [consertos, setConsertos] = useState<boolean>()
-    const [modo, setModo] = useState<boolean>()
+    const [modo, setModo] = useState<boolean>(false)
     const [endProp, setEndProp] = useState<endFinalTipo>({
         cep: "",
         nomeLogradouro: "",
@@ -52,6 +52,19 @@ const perfil = () => {
         idContato: 0,
         idUsuario: 0
     });
+    
+    const ApiUser =async (id:number) =>{
+        try{
+            const res = await fetch(`http://localhost:8080/usuario/${id}`)
+            if(res.ok){
+                const data :Usuario = await res.json()
+                console.log(data)
+                return data
+            }
+        }catch{
+            console.log("Erro ao puxar usuario")
+        }
+    }
 
     useEffect(() => {
         const chamadaUser = async () => {
@@ -59,9 +72,14 @@ const perfil = () => {
                 const userString = sessionStorage.getItem("user");
                 if (userString) {
                     const parsedUser :Usuario = await JSON.parse(userString);
-                    setUser(parsedUser);
-                    enderecoAPI(parsedUser.idEndereco!)
-                    contatoAPI(parsedUser.idContato!)
+                    console.log(parsedUser.idUsuario)
+                    const user = await ApiUser(parsedUser.idUsuario!)
+                    console.log(user)
+                    if(user){
+                        setUser(user);
+                        enderecoAPI(user.idEndereco!)
+                        contatoAPI(user.idContato!)
+                    }
                 }
             } catch {
                 console.log("Erro")
@@ -84,7 +102,6 @@ const perfil = () => {
                 const res = await fetch(`api/endereco/${idEndereco}`)
                 if (res.ok) {
                     const data: endFinalTipo = await res.json()
-                    console.log(data)
                     setEndProp(data)
                 }
             } catch {
@@ -92,20 +109,12 @@ const perfil = () => {
             }
         }
         chamadaUser()
-    }, []);
+    }, [modo]);
 
-    const changeFonte = (fontSize: string) => {
-        if (fontSize === "16px") {
-            setFontSize("")
-        } else if (fontSize === "20px") {
-            setFontSize("")
-        } else if (fontSize === "24px") {
-            setFontSize("")
-        }
-    }
 
-    const changeModo = (modo: string) => {
-        if (modo === "Modo Escuro") {
+
+    const changeModo = (enviado: boolean) => {
+        if (enviado) {
             setModo(true)
             return;
         }
@@ -121,12 +130,11 @@ const perfil = () => {
         setSuasConfiguracoes(nome === "Suas Configuracoes")
         setCarros(nome === "Carros")
         setEndereco(nome === "Endereco")
-        setAcessibilidade(nome === "Acessibilidade")
         setConsertos(nome === "Consertos")
     }
 
     function Volta() {
-        setAcessibilidade(true)
+        setConsertos(true)
         setCarros(true)
         setEndereco(true)
         setSuasConfiguracoes(true)
@@ -136,15 +144,13 @@ const perfil = () => {
     const conteudoChanger = () => {
         switch (conteudo) {
             case 'Suas Configuracoes':
-                return <SuasConfiguracoes contato={contato} user={user} dataNascimento={user.rg} nome={user.nomeUsuario} cpf={user.cpf} senha={user.senha} />
-            case 'Acessibilidade':
-                return <Acessibilidade onChangeFonte={changeFonte} onChangeModo={changeModo} />
+                return <SuasConfiguracoes changeModo={changeModo} contato={contato} user={user} dataNascimento={user.rg} nome={user.nomeUsuario} cpf={user.cpf} senha={user.senha} />
             case 'Endereco':
                 return <Endereco endereco={endProp} nome={user.nomeUsuario} cep={endProp.cep} numero={String(endProp.numeroLogradouro)} cidade={endProp.cidade} estado={endProp.uf} />
             case 'Carros':
                 return <Carros usuario={user} listaCarro={listaCarro} />
             case 'Consertos':
-                return <Consertos />
+                return <Consertos/>
             default:
                 return fontSize;
         }
@@ -155,7 +161,6 @@ const perfil = () => {
         <div className={`container tablet:flex-col flex min-w-full ${modo ? "escuro" : ""}`}>
             <div className='w-1/4 tablet:w-full tablet:flex-row left border-t-4 tablet:border-primary tela:border-primary-dark tela:min-h-screen tablet:min-h-auto'>
                 <BtnSessoesPerfil clicaImagem={Volta} clicado={suasConfiguracoes} onClick={() => mudaBotao("Suas Configuracoes")} name="Suas Configurações" />
-                <BtnSessoesPerfil clicaImagem={Volta} clicado={acessibilidade} name="Acessibilidade" onClick={() => mudaBotao("Acessibilidade")} />
                 <BtnSessoesPerfil clicaImagem={Volta} clicado={endereco} name="Endereço" onClick={() => mudaBotao("Endereco")} />
                 <BtnSessoesPerfil clicaImagem={Volta} clicado={carros} name="Carros" onClick={() => mudaBotao("Carros")} />
                 <BtnSessoesPerfil clicaImagem={Volta} clicado={consertos} name="Consertos" onClick={() => mudaBotao("Consertos")} />

@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request,{params}:{params:{idUser:number}}) {
     try {
         const res  = await fetch(`http://localhost:8080/usuario/${params.idUser}`);
-        const data :Usuario  = await res.json(); 
+        const data :Usuario  = await res.json();
+        console.log(data)
         return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao buscar usuario", error);

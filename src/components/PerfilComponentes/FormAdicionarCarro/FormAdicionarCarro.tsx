@@ -51,9 +51,10 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
     const onSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const quilo = parseFloat(quilometragem)
+        const anoParsed = parseInt(ano)
         let novoCarro = {
             modelo,
-            ano,
+            "ano":anoParsed,
             chassi,
             "quilometragem":quilo,
             placa,
@@ -96,12 +97,6 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                     label="Modelo"
                     placeHolder="Digite o Modelo do seu carro aqui" />
                 <InputArea
-                    value={marca}
-                    required={true}
-                    onChange={valor => setMarca(valor)}
-                    label="Marca"
-                    placeHolder="Digite a Marca do seu carro aqui" />
-                <InputArea
                     value={ano}
                     required={true}
                     tipo="number"
@@ -130,12 +125,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                     label="Placa"
                     max_length={8}
                     placeHolder="Digite a Placa do seu carro aqui" />
-                <InputArea
-                    value={seguro}
-                    required={true}
-                    onChange={valor => setSeguro(valor)}
-                    label="Seguro"
-                    placeHolder="Digite a seguro do seu carro aqui" />
+                
                 <div className="mt-3 flex justify-end BtnSubmit-area">
                     <Botao tipo="submit">Adicionar Carro</Botao>
                 </div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import PecasLista, { pecasTipo } from '../PecasLista/PecasLista';
 import { consertoTipo } from '@/app/api/conserto/[idUser]/route';
 import DropDownConserto from './DropDownConserto/DropDownConserto';
+import { Usuario } from '@/app/login/page';
 
 
 
@@ -14,13 +15,39 @@ export default function Consertos() {
     const [conserto, setConserto] = useState<consertoTipo>();
     const [consertosList, setConsertosList] = useState<consertoTipo[]>([]);
 
+    const ApiUser =async (id:number) =>{
+        try{
+            const res = await fetch(`http://localhost:8080/usuario/${id}`)
+            if(res.ok){
+                const data :Usuario = await res.json()
+                console.log(data)
+                return data
+            }
+        }catch{
+
+        }
+    }
 
     useEffect(() => {
 
-        const userString = sessionStorage.getItem("User");
-        if (userString) {
-            setUser(JSON.parse(userString));
+        const chamadaUser = async () => {
+            try {
+                const userString = sessionStorage.getItem("user");
+                if (userString) {
+                    const parsedUser :Usuario = await JSON.parse(userString);
+                    console.log(parsedUser.idUsuario)
+                    const user = await ApiUser(parsedUser.idUsuario!)
+                    console.log(user)
+                    if(user){
+                        setUser(user);
+
+                    }
+                }
+            } catch {
+                console.log("Erro")
+            }
         }
+        chamadaUser()
     }, []);
     
     const changeConserto = (event: React.ChangeEvent<HTMLSelectElement>) => {

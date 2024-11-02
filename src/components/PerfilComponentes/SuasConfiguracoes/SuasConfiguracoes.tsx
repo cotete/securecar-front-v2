@@ -17,14 +17,15 @@ type SuasConfiguracoesProps ={
     dataNascimento : string;
     user:Usuario
     contato:contatoFinal;
+    changeModo: (enviado:boolean)=>void
 }
 
-const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha} : SuasConfiguracoesProps)=>{
+const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha,changeModo} : SuasConfiguracoesProps)=>{
 
-    const [nomeUser, setNomeUser] = useState(nome);
+    const [nomeUser, setNomeUser] = useState(user.nomeUsuario);
     const [telefoneUser, setTelefoneUser] = useState<string>(contato.telefone);
-    const [cpfUser, setCpfUser] = useState(cpf);
-    const [senhaUser, setSenhaUser] = useState(senha);
+    const [cpfUser, setCpfUser] = useState(user.cpf);
+    const [senhaUser, setSenhaUser] = useState(user.senha);
     const [emailUser, setEmailUser] = useState(contato.email);
     const [dataNascimentoUser, setDataNascimentoUser] = useState(dataNascimento)
     const [disable,setDisable] = useState(true);
@@ -33,15 +34,10 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha} : SuasC
         e.preventDefault()
         console.log(telefoneUser,cpfUser,senhaUser,emailUser)
         if(String(telefoneUser).length == 11 && telefoneUser !="" && senhaUser != "" && emailUser != "" && emailUser.includes('@')){
-            const InfosAtt : Usuario={
+            const InfosAtt ={
                 nomeUsuario: nomeUser,
-                cpf : cpfUser,
                 senha : senhaUser,
-                rg : dataNascimentoUser,
                 genero:user.genero,
-                idContato: user.idContato,
-                idEndereco:user.idEndereco,
-                idUsuario:user.idUsuario 
             };
         const cttAtt : contatoFinal={
             idContato: contato.idContato,
@@ -62,6 +58,7 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha} : SuasC
             },body:JSON.stringify(cttAtt)
         })
         if(resCtt.ok && resUser.ok){
+            changeModo(true)
             alert("Informações atualizadas com sucesso")
         }else{
             alert("Erro ao atualizar informações")

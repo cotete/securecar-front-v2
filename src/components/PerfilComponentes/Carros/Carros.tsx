@@ -57,7 +57,6 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
         }
         }
         chamadaAPI()
-        console.log(carros)
     },[listaCarro])
 
     return(
@@ -71,7 +70,7 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
                 <BtnAdicionarCarro onAddCarro={adicionarLista}/> 
                 </div>
                 <div className="flex flex-row gap-1	">
-                    {carros.map(carro =><CarroCard removerCarro={removerCarro} key={carro.modelo} carro = {carro} nome = {carro.modelo}/>)} 
+                    {carros.map(carro =><CarroCard key={carro.idCarro} removerCarro={removerCarro} carro = {carro} nome = {carro.modelo}/>)} 
                 </div>
             </div>
         </div>:
