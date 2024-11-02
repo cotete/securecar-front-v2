@@ -5,7 +5,7 @@ import NavBar from "./NavBar/NavBar";
 import Link from "next/link";
 import Image from "next/image";
 import logoPorto from "../../../public/img/logo_porto.svg";
-import perfil from "../../../public/icons/profile-pic.svg"
+import perfil from "../../../public/icons/profile-pic.svg";
 const Header = () => {
   const [clicado, setClicado] = useState(false)
   // const login = sessionStorage.getItem('Logado')
