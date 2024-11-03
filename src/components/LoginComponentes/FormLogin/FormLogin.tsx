@@ -4,12 +4,7 @@ import Botao from "@/components/Botao/Botao";
 import InputArea from "@/components/InputArea/InputArea"; 
 import { Usuario } from "@/app/login/page"; 
 import { useRouter } from "next/navigation";
-import { FinalUser } from "@/app/api/usuario/route";
 
-
-type FormLoginProps = {
-    usuarios: Usuario[]; 
-  };
 
 const maskCPF = (value: string): string => {
     return value
@@ -19,7 +14,7 @@ const maskCPF = (value: string): string => {
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
 };
   
-const FormLogin = ({usuarios}: FormLoginProps)=>{
+const FormLogin = ()=>{
     const [inputCPF, setInputCPF] = useState("");
     const [inputSenha, setInputSenha] = useState("");
     const [listaUsers,setListaUsers] = useState<Usuario[]>();
@@ -54,7 +49,7 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
         if(listaUsers != undefined){
         let usuarioAchado = false;
         for(let x = 0; x < listaUsers.length; x++){
-            let user = listaUsers[x];
+            const user = listaUsers[x];
             if(user.cpf === cleanedCPF && user.senha === inputSenha){
                 sessionStorage.setItem("user", JSON.stringify(user));
                 setInputCPF("");

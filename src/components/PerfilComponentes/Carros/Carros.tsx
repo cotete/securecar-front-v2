@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import BtnAdicionarCarro from "../BtnAdicionarCarro/BtnAdicionarCarro";
-import { Carro, CarroId } from "@/app/types"; 
+import { CarroId } from "@/app/types"; 
 import CarroCard from "../CarroCard/CarroCard";
 import { Usuario } from "@/app/login/page";
 

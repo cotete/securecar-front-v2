@@ -1,6 +1,6 @@
 "use client"
 import React, { useEffect, useState } from 'react'
-import PecasLista, { pecasTipo } from '../PecasLista/PecasLista';
+import PecasLista from '../PecasLista/PecasLista';
 import { consertoTipo } from '@/app/api/conserto/[idUser]/route';
 import DropDownConserto from './DropDownConserto/DropDownConserto';
 import { Usuario } from '@/app/login/page';
@@ -101,7 +101,7 @@ export default function Consertos() {
         <div className="border-2 tablet:w-full rounded-xl shadow-xl p-4 w-full flex flex-col carros-container">
             <DropDownConserto label='Consertos' consertos={consertosList} onChange={changeConserto}></DropDownConserto>
             <h1>Diagnostico: {conserto!.descricaoConserto?conserto!.descricaoConserto:"Nenhum concerto achado"}</h1>
-            <PecasLista idUser={user.idUsuario!} idConserto={conserto!.idConserto}></PecasLista>
+            <PecasLista idConserto={conserto!.idConserto}></PecasLista>
         </div>
     </div>
   )

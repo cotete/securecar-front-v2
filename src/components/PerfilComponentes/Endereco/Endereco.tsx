@@ -29,7 +29,7 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
 
     const [disable,setDisable] = useState(true);
 
-    const [cepValido,setCepValido] = useState(false);
+
 
     function changeDisable(){
         if(disable == false){
@@ -78,18 +78,6 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
 
     }
 
-    async function buscaCEP(cep:string) {
-        const res = await fetch(`https://viacep.com.br/ws/${cep}/json/`)
-        if(res.ok){
-            const data : viacepTipo = await res.json();
-            setCepValido(true)
-            setCepUser(cep)
-            setEstadoUser(data.estado)
-            setCidadeUser(data.localidade)
-        }else{
-            setCepValido(false)
-        }
-    }
     const viaCep = async (cep:string) => {
         try {
           const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);

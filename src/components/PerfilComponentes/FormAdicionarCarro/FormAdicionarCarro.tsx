@@ -3,7 +3,6 @@ import InputArea from "@/components/InputArea/InputArea";
 import { useEffect, useState } from "react";
 import { CarroId } from "@/app/types";
 import Botao from "@/components/Botao/Botao";
-import { FinalUser } from "@/app/api/usuario/route";
 import { Usuario } from "@/app/login/page";
 
 type FormAdicionarCarro = {
@@ -12,12 +11,10 @@ type FormAdicionarCarro = {
 
 const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
     const [modelo, setModelo] = useState("")
-    const [marca, setMarca] = useState("")
     const [ano, setAno] = useState("")
     const [chassi, setChassi] = useState("")
     const [quilometragem, setQuilometragem] = useState("")
     const [placa, setPlaca] = useState("")
-    const [seguro, setSeguro] = useState("")
     const [carro, setCarro] = useState<CarroId>({
         idCarro:0,
         idSeguro:0,
@@ -52,7 +49,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
         e.preventDefault();
         const quilo = parseFloat(quilometragem)
         const anoParsed = parseInt(ano)
-        let novoCarro = {
+        const novoCarro = {
             modelo,
             "ano":anoParsed,
             chassi,
@@ -69,7 +66,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                 },body:JSON.stringify(novoCarro)
             })
             if(data.ok){
-                let car : CarroId = await data.json()
+                const car : CarroId = await data.json()
                 setCarro(car)
             }else{
                 throw new Error("Erro ao Adicionar carro")
@@ -78,12 +75,10 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             console.error("Erro: ", err)
         }
         setModelo("");
-        setMarca("");
         setAno("");
         setChassi("");
         setQuilometragem("");
         setPlaca("");
-        setSeguro("");
 
         onCarroCadastrado(carro);
     };

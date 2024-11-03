@@ -1,6 +1,5 @@
 "use client";
 
-import Historico from "@/components/ChatbotComponentes/Historico/Historico"; 
 import { useEffect, useRef, useState } from "react";
 import Mensagens from "@/components/ChatbotComponentes/Mensagens/Mensagens"; 
 import AvaliacaoPopup from "@/components/ChatbotComponentes/Avaliacao/AvaliacaoPopUp"; 
@@ -8,7 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { Usuario } from "../login/page";
-import Watson from "@/components/Watson/Watson";
+
 import sendArrow from "../../../public/icons/send.svg";
 
 const PaginaChatBot = ()=>{

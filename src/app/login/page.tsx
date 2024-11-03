@@ -102,7 +102,7 @@ const PaginaRegistroLogin = () => {
             case 'Cadastro':
                 return <FormRegistro onSubmit={cadastrar} />
             case 'Login':
-                return <FormLogin usuarios={lista_user}/>
+                return <FormLogin/>
         }
     }
 

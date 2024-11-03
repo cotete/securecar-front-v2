@@ -1,5 +1,5 @@
 "use client"
-import { avaliacoes, avaliacoesFinal } from "@/app/api/avaliacao/route";
+import { avaliacoes } from "@/app/api/avaliacao/route";
 import { Usuario } from "@/app/login/page";
 import {
     faFaceAngry,
@@ -10,7 +10,7 @@ import {
   } from "@fortawesome/free-solid-svg-icons";
   // import { faFaceLaughWink } from "@fortawesome/free-solid-svg-icons/faFaceLaughWink";
   import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-  import { useEffect, useState } from "react";
+  import { useState } from "react";
   
   export type PopupProps = {
     isOpen: boolean;
@@ -26,10 +26,10 @@ import {
 
   const postAvaliacao = async ()=>{
     try{
-      let avaliacaoPost :avaliacoes = {
+      const avaliacaoPost :avaliacoes = {
         ds_feedback:"",
         vl_estrelas_feedback:avaliacao,
-        id_usuario: usuario.id_usuario? usuario.id_usuario : 0
+        id_usuario: usuario.idUsuario? usuario.idUsuario : 0
         }
       const res = await fetch("http://localhost:3000/api/avaliacao",{
         method:"POST",
