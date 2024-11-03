@@ -3,7 +3,7 @@
 
 import Botao from '@/components/Botao/Botao';
 import InputArea from '@/components/InputArea/InputArea';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AreaPerfil from '../AreaPerfil/AreaPerfil';
 import Image from 'next/image';
 import { Usuario } from '@/app/login/page';
@@ -29,6 +29,16 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha,changeMo
     const [emailUser, setEmailUser] = useState(contato.email);
     const [dataNascimentoUser, setDataNascimentoUser] = useState(dataNascimento)
     const [disable,setDisable] = useState(true);
+
+
+    useEffect(() => {
+        setNomeUser(user.nomeUsuario);
+        setTelefoneUser(contato.telefone);
+        setCpfUser(user.cpf);
+        setSenhaUser(user.senha);
+        setEmailUser(contato.email);
+        setDataNascimentoUser(dataNascimento);
+      }, [user, contato, dataNascimento]);
 
     async function aoSalvar(e : React.FormEvent<HTMLFormElement>){
         e.preventDefault()
@@ -68,14 +78,9 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha,changeMo
     }
     }
 
-    function changeDisable(){
-        if(disable == false){
-            setDisable(true)
-            return;
-        }
-        setDisable(false)
-        return;
-    }
+    function changeDisable() {
+        setDisable(!disable);
+      }
 
     return(
         <div className="border-2 tablet:w-full rounded-xl shadow-xl p-4 w-full flex flex-col perfil">

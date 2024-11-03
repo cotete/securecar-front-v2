@@ -55,7 +55,6 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
         let usuarioAchado = false;
         for(let x = 0; x < listaUsers.length; x++){
             let user = listaUsers[x];
-            console.log(user)
             if(user.cpf === cleanedCPF && user.senha === inputSenha){
                 sessionStorage.setItem("user", JSON.stringify(user));
                 setInputCPF("");
