@@ -9,7 +9,7 @@ import Image from "next/image";
 import { Usuario } from "../login/page";
 
 import sendArrow from "../../../public/icons/send.svg";
-import Watson from "@/components/Watson/Watson";
+
 
 const PaginaChatBot = ()=>{
     const listaMensagens : string[]=[];
@@ -130,7 +130,6 @@ const PaginaChatBot = ()=>{
                         </form>
                         <div className=" flex justify-center items-center cursor-pointer hover:scale-105 transition-all duration-300 w-1/12 p-1">
                             <Image className="w-full h-10" height={40} width={40} onClick={enviarMsgClick} src={sendArrow} alt="Imagem de enviar mensagem" />
-                            <Watson/>
                         </div>
                     </div>
                 </div>
