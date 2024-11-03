@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import NavBar from "../NavBar/NavBar";
 // import { useRouter } from "next/router";
-import useStorage from "@/utils/hooks/useStorage";
 import Image from "next/image";
 import Link from "next/link";
 import perfil from "../../../../public/icons/profile-pic.svg";  
