@@ -11,7 +11,7 @@ O projeto SecureCar é um sistema de diagnóstico que visa indicar soluções pa
 *Nota: o deploy do projeto consta na branch build, na qual está programada para sempre subir suas atualizações para o ambiente de produção
 
 ## Veja o vídeo demonstrativo da nossa aplicação
-[Protótipo de Youtube](https://www.youtube.com/watch?v=WNw0F5dnafU)
+[Protótipo de Youtube](https://youtu.be/PV4b3i0BW4s)
 
 ## Como rodar o projeto com a api java
 
