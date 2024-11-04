@@ -45,7 +45,7 @@ O projeto ainda consta com integrações com ibm watson, que está interligada a
 </div>
 
 <div style="display: flex; gap: 10px; align-items: center; margin: 20px 0">
-    <img src="./src/assets/imgs/felipe.webp" style="height: 50px; width: 50px; border-radius: 100%" />
+    <img src="./src/assets/imgs/cotete.webp" style="height: 50px; width: 50px; border-radius: 100%" />
     <span style="font-size: 1.5em;">Felipe Ribeiro da Silva</span>
 </div>
 <div style="display: flex; gap: 10px; align-items: center; margin: 20px 0">
