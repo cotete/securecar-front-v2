@@ -67,6 +67,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             })
             if(data.ok){
                 const car : CarroId = await data.json()
+                console.log(car)
                 setCarro(car)
             }else{
                 throw new Error("Erro ao Adicionar carro")

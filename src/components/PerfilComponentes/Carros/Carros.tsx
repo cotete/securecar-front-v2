@@ -49,6 +49,7 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
                 const data : CarroId[] = await res.json()
                 setCarros(data)
             }else{
+                setCarros([])
                 throw new Error("Erro ao chamar API carros")
             }
             

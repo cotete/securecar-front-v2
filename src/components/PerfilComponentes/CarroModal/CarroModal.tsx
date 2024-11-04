@@ -56,7 +56,7 @@ const CarroModal = ({isOpen, carro,children,removerCarro} : CarroModalProps)=>{
 
     const revisao = ()=>{
         if(parseFloat(carro.quilometragem) > 8000){
-            return`Cuidado está próximo da revisão de 10000 Quilômetros. Faltam ${10000 - parseFloat(carro.quilometragem)/10000} Quilômetros.`
+            return`Cuidado está próximo da revisão de 10000 Quilômetros. Faltam ${10000 - (parseFloat(carro.quilometragem)/10000)} Quilômetros.`
         }else{
             return`Faltam ${10000 - (parseFloat(carro.quilometragem)/10000)} Quilômetros para a revisão`
         }
