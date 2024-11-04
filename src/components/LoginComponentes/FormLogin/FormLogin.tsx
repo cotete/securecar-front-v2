@@ -23,7 +23,7 @@ const FormLogin = ()=>{
     useEffect(()=>{
         const chamaApi = async () => {
             try{
-            const res = await fetch("api/usuario")
+            const res = await fetch("http://localhost:8080/usuario")
             const data :Usuario[] = await res.json()
             setListaUsers(data)
             

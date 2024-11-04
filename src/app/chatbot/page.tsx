@@ -10,6 +10,7 @@ import { Usuario } from "../login/page";
 
 import sendArrow from "../../../public/icons/send.svg";
 
+
 const PaginaChatBot = ()=>{
     const listaMensagens : string[]=[];
 
