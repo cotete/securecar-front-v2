@@ -1,5 +1,5 @@
 
-import { Carro, CarroId } from "@/app/types" 
+import { CarroId } from "@/app/types" 
 import ModalAdicionarCarro from "../ModalAdicionarCarro/ModalAdicionarCarro";
 import { useState } from "react"
 import Botao from "@/components/Botao/Botao"

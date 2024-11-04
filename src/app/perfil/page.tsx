@@ -1,7 +1,6 @@
 "use client";
 import { contatoFinal } from "@/app/api/contato/route";
 import { endFinalTipo } from "@/app/api/endereco/route";
-import Acessibilidade from "@/components/PerfilComponentes/Acessibilidade/Acessibilidade";
 import BtnSessoesPerfil from "@/components/PerfilComponentes/BtnSessoesPerfil/BtnSessoesPerfil";
 import Carros from "@/components/PerfilComponentes/Carros/Carros";
 import Consertos from "@/components/PerfilComponentes/Consertos/Consertos";
@@ -15,12 +14,10 @@ import { Usuario } from "../login/page";
 
 
 
-const perfil = () => {
+const Perfil = () => {
 
     const [conteudo, setConteudo] = useState("Suas Configuracoes")
-    const [fontSize, setFontSize] = useState("")
     const [suasConfiguracoes, setSuasConfiguracoes] = useState<boolean>(true)
-    const [acessibilidade, setAcessibilidade] = useState<boolean>()
     const [carros, setCarros] = useState<boolean>()
     const [endereco, setEndereco] = useState<boolean>()
     const [consertos, setConsertos] = useState<boolean>()
@@ -152,7 +149,7 @@ const perfil = () => {
             case 'Consertos':
                 return <Consertos/>
             default:
-                return fontSize;
+                return 
         }
 
     }
@@ -173,4 +170,4 @@ const perfil = () => {
     )
 }
 
-export default perfil
+export default Perfil

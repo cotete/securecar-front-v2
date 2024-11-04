@@ -10,7 +10,7 @@ export type pecasTipo={
 
 
 
-export default function PecasLista( {idUser,idConserto} :{idUser:number,idConserto:number}) {
+export default function PecasLista( {idConserto} :{idConserto:number}) {
 
     const [listaPecas,setListaPecas] = useState<pecasTipo[]>()
 

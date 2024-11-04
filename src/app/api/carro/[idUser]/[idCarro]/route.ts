@@ -1,4 +1,4 @@
-import { Carro, CarroId } from "@/app/types";
+import { CarroId } from "@/app/types";
 import { NextResponse } from "next/server";
 
 
@@ -6,7 +6,7 @@ import { NextResponse } from "next/server";
 export async function PUT(request: Request,{params}:{params:{idUser:number,idCarro:number}}) {
     try {
         const carro : CarroId = await request.json();
-        const res = await fetch(`http://localhost:8080/carro/${params.idUser}/${params.idCarro}`,{
+        await fetch(`http://localhost:8080/carro/${params.idUser}/${params.idCarro}`,{
             method:'PUT',
             headers:{
                 "Content-Type": "application/json",
@@ -21,7 +21,7 @@ export async function PUT(request: Request,{params}:{params:{idUser:number,idCar
 
 export async function DELETE(request: Request,{params}:{params:{idUser:number,idCarro:number}}) {
     try {
-        const res = await fetch(`http://localhost:8080/carro/${params.idCarro}`,{
+        await fetch(`http://localhost:8080/carro/${params.idCarro}`,{
             method:'DELETE',
             headers:{
                 "Content-Type": "application/json",

@@ -2,7 +2,6 @@ import { CarroId } from "@/app/types";
 
 import { useRef , useEffect, useState } from "react"
 import InfoCarro from "../InfoCarro/InfoCarro";
-import { seguro } from "@/app/api/seguro/route";
 import { Usuario } from "@/app/login/page";
 
 
