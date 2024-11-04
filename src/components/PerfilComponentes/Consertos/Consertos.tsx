@@ -83,7 +83,7 @@ export default function Consertos() {
         const chamadaApi = async () => {
           if (user.idUsuario !== 0) { // Certifica-se de que o user foi carregado
             try {
-              const consertosUser = await fetch(`api/conserto/${user.idUsuario}`);
+              const consertosUser = await fetch(`http://localhost:8080/conserto/listar?id_usuario=${user.idUsuario}`);
               const resultadoConserto: consertoTipo[] = await consertosUser.json();
               setConsertosList(resultadoConserto);
             } catch (error) {

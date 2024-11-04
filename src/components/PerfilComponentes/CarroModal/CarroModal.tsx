@@ -59,7 +59,7 @@ const CarroModal = ({isOpen, carro,children,removerCarro} : CarroModalProps)=>{
     async function handleRemover(id:number){
         removerCarro(id)
         try{
-            const data = await fetch(`api/carro/${user.idUsuario}/${id}`,{
+            const data = await fetch(`http://localhost:8080/carro/${id}`,{
                 method:'DELETE',
                 headers: {
                     'Content-Type': 'application/json'

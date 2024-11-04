@@ -12,7 +12,7 @@ export type avaliacoesFinal={
 
 export async function GET() {
     try {
-        const res  = await fetch(`avaliacoes`);
+        const res  = await fetch(`http://localhost:8080/feedback`);
         const data :avaliacoesFinal  = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
@@ -25,7 +25,7 @@ export async function POST(request:Request) {
     try {
         const avaliacoes: avaliacoes = await request.json();
 
-        const res = await fetch("carro-Link-java",{
+        const res = await fetch("http://localhost:8080/feedback",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",

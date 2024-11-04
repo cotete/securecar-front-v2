@@ -33,7 +33,7 @@ export default function PecasLista( {idConserto} :{idConserto:number}) {
     <div>
         <table className="w-full divide-y divide-gray-200">
                 <thead>
-                    <tr className="bg-[#FFEDE7]">
+                    <tr className="bg-primary">
                         <th className="px-4 py-2 text-left w-1/4">Id</th>
                         <th className="px-4 py-2 text-left w-1/4">Nome da peça</th>
                         <th className="px-4 py-2 text-left w-1/4">Valor</th>
