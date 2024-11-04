@@ -62,9 +62,10 @@ const PaginaRegistroLogin = () => {
         return res
     }
 
-    async function cadastrar(inputNome: string, inputSenha: string, inputCPF: string, inputNascimento:string, contato: contato, endereco:enderecoTipo , inputRG:string,inputGenero:string): Promise<void> {
-
-            const usuario: Usuario = {
+    async function cadastrar(inputNome: string, inputSenha: string, inputCPF: string, contato: contato, endereco:enderecoTipo , inputRG:string,inputGenero:string): Promise<void> {
+        
+            
+        const usuario: Usuario = {
                 nomeUsuario : inputNome,
                 senha: inputSenha,
                 cpf: inputCPF,

@@ -21,7 +21,8 @@ export async function PUT(request: Request,{params}:{params:{idContato:number}})
                 "Content-Type": "application/json",
             },body:JSON.stringify(contato)
         })
-        return res.ok;
+        const data :contatoFinal  = await res.json(); 
+        return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao editar carro", error);
         throw error; 

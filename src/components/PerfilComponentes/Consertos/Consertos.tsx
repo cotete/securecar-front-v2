@@ -3,47 +3,96 @@ import React, { useEffect, useState } from 'react'
 import PecasLista, { pecasTipo } from '../PecasLista/PecasLista';
 import { consertoTipo } from '@/app/api/conserto/[idUser]/route';
 import DropDownConserto from './DropDownConserto/DropDownConserto';
+import { Usuario } from '@/app/login/page';
 
 
 
 
 export default function Consertos() {
     
-    const [user, setUser] = useState<any>(null);
+    const [user, setUser] = useState<Usuario>({
+        nomeUsuario: "",
+        senha: "",
+        cpf: "",
+        genero: "",
+        rg: "",
+        idEndereco: 0,
+        idContato: 0,
+        idUsuario: 0
+    });
 
-    const [conserto, setConserto] = useState<consertoTipo>();
-    const [consertosList, setConsertosList] = useState<consertoTipo[]>([]);
+    const [conserto, setConserto] = useState<consertoTipo>({
+        idConserto: 0, 
+        dataConserto: new Date(), 
+        descricaoConserto: "", 
+        valorConserto: "0.00", 
+        idUsuario: 0, 
+      });
+    const [consertosList, setConsertosList] = useState<consertoTipo[]>([
+        {
+            idConserto: 0, 
+            dataConserto: new Date(), 
+            descricaoConserto: "", 
+            valorConserto: "0.00", 
+            idUsuario: 0, 
+          }
+    ]);
 
+    const ApiUser =async (id:number) =>{
+        try{
+            const res = await fetch(`http://localhost:8080/usuario/${id}`)
+            if(res.ok){
+                const data :Usuario = await res.json()
+                console.log(data)
+                return data
+            }
+        }catch{
+
+        }
+    }
 
     useEffect(() => {
 
-        const userString = sessionStorage.getItem("User");
-        if (userString) {
-            setUser(JSON.parse(userString));
+        const chamadaUser = async () => {
+            try {
+                const userString = sessionStorage.getItem("user");
+                if (userString) {
+                    const parsedUser :Usuario = await JSON.parse(userString);
+                    const user = await ApiUser(parsedUser.idUsuario!)
+                    if(user){
+                        setUser(user);
+
+                    }
+                }
+            } catch {
+                console.log("Erro")
+            }
         }
+        chamadaUser()
     }, []);
     
     const changeConserto = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const selectedId = parseInt(event.target.value, 10);
-        const selectedConserto = consertosList.find(conserto => conserto.id_conserto === selectedId);
+        const selectedConserto = consertosList.find(conserto => conserto.idConserto === selectedId);
         if (selectedConserto) {
             setConserto(selectedConserto);
         }
     };
 
-    useEffect(()=>{
-
-        const chamadaApi = async ()=>{
-            const consertosUser = await fetch(`api/consertos/${user.idUser}`)
-            const resultadoConserto: consertoTipo[]  = await consertosUser.json()
-
-            setConsertosList(resultadoConserto);
-
-        }
+    useEffect(() => {
+        const chamadaApi = async () => {
+          if (user.idUsuario !== 0) { // Certifica-se de que o user foi carregado
+            try {
+              const consertosUser = await fetch(`api/conserto/${user.idUsuario}`);
+              const resultadoConserto: consertoTipo[] = await consertosUser.json();
+              setConsertosList(resultadoConserto);
+            } catch (error) {
+              console.error("Erro ao buscar consertos:", error);
+            }
+          }
+        };
         chamadaApi();
-
-        
-    },[conserto])
+      }, [user]);
 
 
 
@@ -51,8 +100,8 @@ export default function Consertos() {
     <div>
         <div className="border-2 tablet:w-full rounded-xl shadow-xl p-4 w-full flex flex-col carros-container">
             <DropDownConserto label='Consertos' consertos={consertosList} onChange={changeConserto}></DropDownConserto>
-            <h1>Diagnostico: {conserto!.ds_conserto}</h1>
-            <PecasLista idUser={conserto!.id_usuario} idConserto={conserto!.id_conserto}></PecasLista>
+            <h1>Diagnostico: {conserto!.descricaoConserto?conserto!.descricaoConserto:"Nenhum concerto achado"}</h1>
+            <PecasLista idUser={user.idUsuario!} idConserto={conserto!.idConserto}></PecasLista>
         </div>
     </div>
   )

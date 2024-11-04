@@ -4,7 +4,7 @@ const imgWebsitesMocked = ['cdn.pixabay.com', 'www.eusemfronteiras.com.br', 'enc
 
 const nextConfig = {
     images: {
-        domains: [...imgWebsitesMocked, 'github.com'],   
+        domains: [...imgWebsitesMocked, 'github.com', 'images.pexels.com'],   
     },
 };
 

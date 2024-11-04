@@ -1,0 +1,20 @@
+.blog-content p,.blog-content h2,.blog-content h3{
+    line-height: 1.3em;
+    margin-bottom: 1em;
+}
+.blog-content h2, .blog-content h3{
+    font-weight: bold;
+}
+
+.blog-content img{
+    width: 100%;
+    height: auto;
+    margin: 1em 0;
+    object-fit: cover;
+}
+@media screen and (max-width: 767px) {
+  .blog-content{
+    padding: 0 2em;
+  }
+
+}

@@ -10,10 +10,11 @@ export type seguro={
 }
 
 
-export async function GET(request: Request,{params}:{params:{idSeguro:number}}) {
+
+export async function GET() {
     try {
-        const res = await fetch(`Link-API/${params.idSeguro}`);
-        const data:seguro  = await res.json(); 
+        const res = await fetch(`http://localhost:8080/seguro`);
+        const data:seguro[]  = await res.json(); 
         return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao buscar seguros", error);
