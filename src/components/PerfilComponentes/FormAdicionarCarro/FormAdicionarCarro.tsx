@@ -59,7 +59,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             idSeguro:1
         };
         try{
-            const data = await fetch(`api/carro/`,{
+            const data = await fetch(`http://localhost:8080/carro`,{
                 method:'POST',
                 headers:{
                     "Content-Type": "application/json",

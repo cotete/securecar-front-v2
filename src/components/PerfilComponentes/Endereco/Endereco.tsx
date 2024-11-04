@@ -41,7 +41,7 @@ const Endereco = ({endereco,nome,cep,numero,cidade,estado} : EnderecoProps)=>{
     }
 
     async function  guardarEndereco(end : enderecoTipo){
-        const res = await fetch(`api/endereco/${endereco.idEndereco}`,{
+        const res = await fetch(`http://localhost:8080/endereco/${endereco.idEndereco}`,{
             method: "PUT",
             headers:{
             "Content-Type": "application/json",

@@ -32,7 +32,7 @@ const PaginaRegistroLogin = () => {
     const [conteudo, setConteudo] = useState('Cadastro')
 
     async function  guardarEndereco(endereco:enderecoTipo){
-        const res = await fetch("api/endereco",{
+        const res = await fetch("http://localhost:8080/endereco",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",
@@ -42,7 +42,7 @@ const PaginaRegistroLogin = () => {
         return res
     }
     async function  guardarUser(user:Usuario){
-        const res = await fetch("api/usuario",{
+        const res = await fetch("http://localhost:8080/usuario",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",
@@ -52,7 +52,7 @@ const PaginaRegistroLogin = () => {
         return res
     }
     async function  guardarContato(contato:contato){
-        const res = await fetch("api/contato",{
+        const res = await fetch("http://localhost:8080/contato",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",

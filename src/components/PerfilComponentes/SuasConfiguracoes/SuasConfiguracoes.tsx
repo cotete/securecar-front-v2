@@ -55,13 +55,13 @@ const SuasConfiguracoes = ({contato,user,dataNascimento, nome,cpf,senha,changeMo
             email: emailUser
         }
 
-        const resUser = await fetch(`api/usuario/${user.idUsuario}`,{
+        const resUser = await fetch(`http://localhost:8080/usuario/${user.idUsuario}`,{
             method:"PUT",
             headers:{
                 "Content-Type": "application/json",
             },body:JSON.stringify(InfosAtt)
         })
-        const resCtt = await fetch(`api/contato/${contato.idContato}`,{
+        const resCtt = await fetch(`http://localhost:8080/contato/${contato.idContato}`,{
             method:"PUT",
             headers:{
                 "Content-Type": "application/json",
