@@ -79,24 +79,24 @@ const Perfil = () => {
                     }
                 }
             } catch {
-                console.log("Erro")
+                console.log("Erro na chamada user")
             }
         }
 
         const contatoAPI = async (idContato: number) => {
             try {
-                const res = await fetch(`api/contato/${idContato}`)
+                const res = await fetch(`http://localhost:8080/contato/${idContato}`)
                 if (res.ok) {
                     const data: contatoFinal = await res.json()
                     setContato(data)
                 }
             } catch {
-                console.log("ErroInsano")
+                console.log("Erro na api de contato")
             }
         }
         const enderecoAPI = async (idEndereco: number) => {
             try {
-                const res = await fetch(`api/endereco/${idEndereco}`)
+                const res = await fetch(`http://localhost:8080/endereco/${idEndereco}`)
                 if (res.ok) {
                     const data: endFinalTipo = await res.json()
                     setEndProp(data)

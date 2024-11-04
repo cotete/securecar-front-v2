@@ -44,11 +44,12 @@ const Carros = ({listaCarro,usuario} : CarroListProps)=>{
     useEffect(()=>{
         const chamadaAPI = async () => {
             try{
-            const res = await fetch(`/api/carro/${usuario.idUsuario}`)
+            const res = await fetch(`http://localhost:8080/carro/?id_usuario=${usuario.idUsuario}`)
             if(res.ok){
                 const data : CarroId[] = await res.json()
                 setCarros(data)
             }else{
+                setCarros([])
                 throw new Error("Erro ao chamar API carros")
             }
             

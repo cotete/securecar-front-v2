@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header/Header";
 import Footer from "@/components/Folder/Footer";
-import Chatbot from "@/components/Chatbot/Chatbot";
+import Watson from "@/components/Watson/Watson";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -18,7 +18,7 @@ export default function RootLayout({
     <html lang="pt-br">
       <body>
         <Header />
-        <Chatbot />
+        <Watson/>
         {children}
         <Footer />
       </body>

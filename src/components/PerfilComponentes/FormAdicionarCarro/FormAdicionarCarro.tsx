@@ -59,7 +59,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             idSeguro:1
         };
         try{
-            const data = await fetch(`api/carro/`,{
+            const data = await fetch(`http://localhost:8080/carro`,{
                 method:'POST',
                 headers:{
                     "Content-Type": "application/json",
@@ -67,6 +67,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             })
             if(data.ok){
                 const car : CarroId = await data.json()
+                console.log(car)
                 setCarro(car)
             }else{
                 throw new Error("Erro ao Adicionar carro")

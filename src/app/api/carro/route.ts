@@ -6,7 +6,7 @@ export async function POST(request:Request) {
         const carro = await request.json();
         console.log(carro)
 
-        const res = await fetch("http://localhost:8080/carro/",{
+        const res = await fetch("http://localhost:8080/carro",{
             method: "POST",
             headers:{
             "Content-Type": "application/json",

@@ -7,6 +7,7 @@ import Image from "next/image";
 import logoPorto from "../../../public/img/logo_porto.svg";
 import perfil from "../../../public/icons/profile-pic.svg";
 import { Usuario } from "@/app/login/page";
+import { usePathname } from "next/navigation";
 const Header = () => {
   const [clicado, setClicado] = useState(false)
 
@@ -20,6 +21,8 @@ const Header = () => {
     idContato: 0,
     idUsuario: 0
 });
+
+const pathname = usePathname();
 
 const ApiUser =async (id:number) =>{
     try{
@@ -53,7 +56,7 @@ useEffect(() => {
         }
     }
     chamadaUser()
-},[])
+},[pathname])
 
 
   function clicadoVerifica() {
