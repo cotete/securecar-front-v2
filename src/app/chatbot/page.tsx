@@ -1,6 +1,5 @@
 "use client";
 
-import Historico from "@/components/ChatbotComponentes/Historico/Historico"; 
 import { useEffect, useRef, useState } from "react";
 import Mensagens from "@/components/ChatbotComponentes/Mensagens/Mensagens"; 
 import AvaliacaoPopup from "@/components/ChatbotComponentes/Avaliacao/AvaliacaoPopUp"; 
@@ -8,28 +7,58 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight } from "@fortawesome/free-solid-svg-icons";
 import Image from "next/image";
 import { Usuario } from "../login/page";
+
 import sendArrow from "../../../public/icons/send.svg";
+
 
 const PaginaChatBot = ()=>{
     const listaMensagens : string[]=[];
 
     const [user, setUser] = useState<Usuario>({
-        nm_usuario:"",
-        ds_senha: "",
-        nr_cpf: "",
-        Nascimento: "",
-        id_endereco: 0,
-        id_contato: 0,
-        id_usuario:0
+        nomeUsuario: "",
+        senha: "",
+        cpf: "",
+        genero: "",
+        rg: "",
+        idEndereco: 0,
+        idContato: 0,
+        idUsuario: 0
     });
-
+    
+    const ApiUser =async (id:number) =>{
+        try{
+            const res = await fetch(`http://localhost:8080/usuario/${id}`)
+            if(res.ok){
+                const data :Usuario = await res.json()
+                console.log(data)
+                return data
+            }
+        }catch{
+            console.log("Erro ao puxar usuario")
+        }
+    }
     useEffect(() => {
 
-        const userString  = sessionStorage.getItem("user");
-        if (userString) {
-            setUser(JSON.parse(userString));
+        const chamadaUser = async () => {
+            try {
+                const userString = sessionStorage.getItem("user");
+                if (userString) {
+                    const parsedUser :Usuario = await JSON.parse(userString);
+                    console.log(parsedUser.idUsuario)
+                    const user = await ApiUser(parsedUser.idUsuario!)
+                    console.log(user)
+                    if(user){
+                        setUser(user);
+                    }
+                }
+            } catch {
+                console.log("Erro")
+            }
         }
+        chamadaUser()
     }, []);
+
+
 
 
     const [mensagem,setMensagem] = useState("");
@@ -87,8 +116,7 @@ const PaginaChatBot = ()=>{
                 <p className={`text-white tracking-wide font-semibold transition-all duration-300 ${clicked ? 'hidden' : ''}`}>Abrir histórico</p>
                 <p className={`text-white tracking-wide font-semibold transition-all duration-300 ${clicked ? '' : 'hidden'}`}>Fechar histórico</p>
             </div>
-            <div className="min-h-full flex justify-between w-full  items-end">
-                <Historico clicked={clicked} />
+            <div className="min-h-full flex justify-between w-full h-[80vh] items-end">
                 <div className="flex h-full w-full flex-col items-end pb-2 bottom-0 relative px-5">
                     <div ref={mensagensEndRef} className="w-[50%] h-full  mb-5 overflow-x-hidden overflow-y-scroll">
                         <div className="flex justify-end min-h-full items-end flex-col gap-y-4">

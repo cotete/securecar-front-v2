@@ -3,7 +3,7 @@ import InputArea from "@/components/InputArea/InputArea";
 import { useEffect, useState } from "react";
 import { CarroId } from "@/app/types";
 import Botao from "@/components/Botao/Botao";
-import { FinalUser } from "@/app/api/usuario/route";
+import { Usuario } from "@/app/login/page";
 
 type FormAdicionarCarro = {
     onCarroCadastrado: (carro: CarroId) => void;
@@ -11,31 +11,29 @@ type FormAdicionarCarro = {
 
 const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
     const [modelo, setModelo] = useState("")
-    const [marca, setMarca] = useState("")
     const [ano, setAno] = useState("")
     const [chassi, setChassi] = useState("")
     const [quilometragem, setQuilometragem] = useState("")
     const [placa, setPlaca] = useState("")
-    const [seguro, setSeguro] = useState("")
     const [carro, setCarro] = useState<CarroId>({
-        id_Carro:0,
-        id_seguro:0,
-        id_usuario:0,
-        marca:"",
+        idCarro:0,
+        idSeguro:0,
+        idUsuario:0,
         modelo:"",
         ano:"",
         placa:"",
         quilometragem:"",
         chassi:"",
     })
-    const [user, setUser] = useState<FinalUser>({
-        nm_usuario:"",
-        ds_senha: "",
-        nr_cpf: "",
-        Nascimento: "",
-        id_endereco: 0,
-        id_contato: 0,
-        id_user:0
+    const [user, setUser] = useState<Usuario>({
+        nomeUsuario:"",
+        senha: "",
+        cpf: "",
+        rg: "",
+        genero:"",
+        idEndereco: 0,
+        idContato: 0,
+        idUsuario:0
     });
 
 
@@ -49,24 +47,26 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
 
     const onSave = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        let novoCarro = {
+        const quilo = parseFloat(quilometragem)
+        const anoParsed = parseInt(ano)
+        const novoCarro = {
             modelo,
-            marca,
-            ano,
+            "ano":anoParsed,
             chassi,
-            quilometragem,
+            "quilometragem":quilo,
             placa,
-            seguro
+            idUsuario:user.idUsuario,
+            idSeguro:1
         };
         try{
-            const data = await fetch(`api/carros/${user.id_user}`,{
+            const data = await fetch(`api/carro/`,{
                 method:'POST',
                 headers:{
                     "Content-Type": "application/json",
                 },body:JSON.stringify(novoCarro)
             })
             if(data.ok){
-                let car : CarroId = await data.json()
+                const car : CarroId = await data.json()
                 setCarro(car)
             }else{
                 throw new Error("Erro ao Adicionar carro")
@@ -75,12 +75,10 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
             console.error("Erro: ", err)
         }
         setModelo("");
-        setMarca("");
         setAno("");
         setChassi("");
         setQuilometragem("");
         setPlaca("");
-        setSeguro("");
 
         onCarroCadastrado(carro);
     };
@@ -94,12 +92,6 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                     label="Modelo"
                     placeHolder="Digite o Modelo do seu carro aqui" />
                 <InputArea
-                    value={marca}
-                    required={true}
-                    onChange={valor => setMarca(valor)}
-                    label="Marca"
-                    placeHolder="Digite a Marca do seu carro aqui" />
-                <InputArea
                     value={ano}
                     required={true}
                     tipo="number"
@@ -110,6 +102,7 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                 <InputArea
                     value={chassi}
                     required={true}
+                    max_length={17}
                     onChange={valor => setChassi(valor)}
                     label="Chassi"
                     placeHolder="Digite o Chassi do seu carro aqui" />
@@ -125,14 +118,9 @@ const FormAdicionarCarro = ({ onCarroCadastrado }: FormAdicionarCarro) => {
                     required={true}
                     onChange={valor => setPlaca(valor)}
                     label="Placa"
-                    max_length={7}
+                    max_length={8}
                     placeHolder="Digite a Placa do seu carro aqui" />
-                <InputArea
-                    value={seguro}
-                    required={true}
-                    onChange={valor => setSeguro(valor)}
-                    label="Seguro"
-                    placeHolder="Digite a seguro do seu carro aqui" />
+                
                 <div className="mt-3 flex justify-end BtnSubmit-area">
                     <Botao tipo="submit">Adicionar Carro</Botao>
                 </div>

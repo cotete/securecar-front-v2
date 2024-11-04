@@ -1,31 +1,31 @@
 import React, { useEffect, useState } from 'react'
 
 export type pecasTipo={
-    id:number
-    vlPeca:number
-    dsPeca:string
-    qtdPeca:number
+    idPeca:number
+    valorPeca:number
+    descricaoPeca:string
+    quantidadePeca:number
+    quantidadePedido:number
 }
 
 
 
-export default function PecasLista( {idUser,idConserto} :{idUser:number,idConserto:number}) {
+export default function PecasLista( {idConserto} :{idConserto:number}) {
 
     const [listaPecas,setListaPecas] = useState<pecasTipo[]>()
 
     useEffect(()=>{
         const chamadaApi = async ()=>{
-            const data  = await fetch(`conserto/${idUser}/${idConserto}`)
+            const data  = await fetch(`http://localhost:8080/conserto/${idConserto}/pecas`)
             const lista : pecasTipo[] = await data.json()
+            console.log(lista)
             if (lista){
                 setListaPecas(lista)
             }    
         }
 
         chamadaApi();
-
-        
-    },[])
+    },[idConserto])
 
 
 
@@ -42,18 +42,18 @@ export default function PecasLista( {idUser,idConserto} :{idUser:number,idConser
                 </thead>
                 <tbody>
                     {listaPecas? listaPecas.map(peca=>(
-                    <tr className="even:bg-gray-50">
-                        <td className="px-4 py-2">{peca.id}</td>
-                        <td className="px-4 py-2">{peca.dsPeca} R$</td>
-                        <td className="px-4 py-2">{peca.vlPeca}</td>
-                        <td className="px-4 py-2">{peca.qtdPeca}</td>
+                    <tr key={peca.idPeca} className="even:bg-gray-50">
+                        <td className="px-4 py-2">{peca.idPeca}</td>
+                        <td className="px-4 py-2">{peca.descricaoPeca} R$</td>
+                        <td className="px-4 py-2">R$ {peca.valorPeca}</td>
+                        <td className="px-4 py-2">{peca.quantidadePedido}</td>
                     </tr>)):
                     <tr>Nenhum conserto selecionado</tr>}
                 </tbody>
                 <tfoot>
                     <tr>
                         <td>
-                            Valor total conserto: {listaPecas? listaPecas.reduce((acc, peca) => acc + peca.vlPeca, 0): 0}
+                            Valor total conserto: {listaPecas? listaPecas.reduce((acc, peca) => acc + peca.valorPeca, 0): 0}
                         </td>
                     </tr>
                 </tfoot>

@@ -9,7 +9,6 @@ type FormRegistroProps = {
     inputNome: string,
     inputSenha: string,
     inputCPF: string,
-    inputNascimento: string,
     contato: contato,
     endereco: enderecoTipo,
     inputRG: string,
@@ -48,11 +47,11 @@ const FormRegistro = ({ onSubmit }: FormRegistroProps) => {
   const [inputGenero, setInputGenero] = useState("");
   const [inputNumero, setInputNumero] = useState("");
   const [inputCEP, setInputCEP] = useState("");
-  const [inputNascimento, setInputNascimento] = useState("2002/10/10");
   const [inputTelefone, setInputTelefone] = useState("");
 
   const viaCep = async (cep: string) => {
     try {
+      cep.replace("-","")
       const response = await fetch(`https://viacep.com.br/ws/${cep}/json/`);
       if (!response.ok) {
         throw new Error(`Erro ao buscar CEP: ${response.statusText}`);
@@ -98,6 +97,7 @@ const maskRG = (value: string): string => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const via = await viaCep(inputCEP);
+    console.log(via)
     if (!via) {
       console.error("Erro ao obter o endereço com o CEP fornecido.");
       return;
@@ -106,15 +106,18 @@ const maskRG = (value: string): string => {
     function verificaEmail(inputEmail: string): boolean {
       return inputEmail.includes("@");
     }
-
+    const cleanedCPF = inputCPF.replace(/\D/g, ""); 
+    const cleanedTelefone = inputTelefone.replace(/\D/g, "");
+    const cleanedRG = inputRG.replace(/\D/g, "");
+    const cleanedCEP = inputCEP.replace(/\D/g, "");
     if (
       inputSenhaAux === inputSenha &&
       verificaEmail(inputEmail) &&
-      inputCEP.length === 8 &&
-      inputCPF.length === 14
+      cleanedCPF.length === 11 && 
+      cleanedCEP.length === 8
     ) {
       const endereco: enderecoTipo = {
-        cep: inputCEP,
+        cep: cleanedCEP,
         nomeLogradouro: via.logradouro,
         numeroLogradouro: parseInt(inputNumero),
         uf: via.uf,
@@ -124,18 +127,17 @@ const maskRG = (value: string): string => {
       };
 
       const contato: contato = {
-        telefone: inputTelefone,
+        telefone: cleanedTelefone,
         email: inputEmail,
       };
 
       await onSubmit(
         inputNome,
         inputSenha,
-        inputCPF,
-        inputNascimento,
+        cleanedCPF,
         contato,
         endereco,
-        inputRG,
+        cleanedRG,
         inputGenero
       );
 
@@ -150,7 +152,7 @@ const maskRG = (value: string): string => {
       setInputRG("");
       setInputGenero("");
     } else {
-      console.error("Algo de errado aconteceu.");
+      console.error("Algo de errado aqui no formulario.");
     }
   };
 
@@ -228,6 +230,13 @@ const maskRG = (value: string): string => {
           label="Telefone"
           placeHolder="Digite seu Telefone ((XX) XXXXX-XXXX)"
           max_length={15}
+        />
+        <InputArea
+          value={inputGenero}
+          required={true}
+          onChange={valor => setInputGenero(valor)}
+          label="Gênero"
+          placeHolder="Digite seu gênero (M/F/Outro)"
         />
         <div className="p-3 w-full flex items-center justify-center">
           <Botao tipo="submit">Registrar-se</Botao>

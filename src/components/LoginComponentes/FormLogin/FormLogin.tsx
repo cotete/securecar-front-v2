@@ -4,12 +4,7 @@ import Botao from "@/components/Botao/Botao";
 import InputArea from "@/components/InputArea/InputArea"; 
 import { Usuario } from "@/app/login/page"; 
 import { useRouter } from "next/navigation";
-import { FinalUser } from "@/app/api/usuario/route";
 
-
-type FormLoginProps = {
-    usuarios: Usuario[]; 
-  };
 
 const maskCPF = (value: string): string => {
     return value
@@ -19,7 +14,7 @@ const maskCPF = (value: string): string => {
     .replace(/(\d{3})(\d{1,2})$/, '$1-$2'); 
 };
   
-const FormLogin = ({usuarios}: FormLoginProps)=>{
+const FormLogin = ()=>{
     const [inputCPF, setInputCPF] = useState("");
     const [inputSenha, setInputSenha] = useState("");
     const [listaUsers,setListaUsers] = useState<Usuario[]>();
@@ -28,7 +23,7 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
     useEffect(()=>{
         const chamaApi = async () => {
             try{
-            const res = await fetch("api/usuario")
+            const res = await fetch("http://localhost:8080/usuario")
             const data :Usuario[] = await res.json()
             setListaUsers(data)
             
@@ -39,7 +34,9 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
         chamaApi()
     },[])
 
-
+    const removeMaskCPF = (value: string): string => {
+        return value.replace(/\D/g, ''); // Remove tudo que não é número
+      };
 
     const validar = (e: React.FormEvent<HTMLFormElement>) : void =>{
         e.preventDefault();
@@ -48,12 +45,12 @@ const FormLogin = ({usuarios}: FormLoginProps)=>{
             console.log("Usuários ainda não foram carregados.");
             return;
         }
+        const cleanedCPF = removeMaskCPF(inputCPF);
         if(listaUsers != undefined){
         let usuarioAchado = false;
         for(let x = 0; x < listaUsers.length; x++){
-            let user = listaUsers[x];
-            console.log(user)
-            if(user.cpf === inputCPF && user.senha === inputSenha){
+            const user = listaUsers[x];
+            if(user.cpf === cleanedCPF && user.senha === inputSenha){
                 sessionStorage.setItem("user", JSON.stringify(user));
                 setInputCPF("");
                 setInputSenha("");

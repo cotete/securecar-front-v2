@@ -4,7 +4,8 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request,{params}:{params:{idUser:number}}) {
     try {
         const res  = await fetch(`http://localhost:8080/usuario/${params.idUser}`);
-        const data :Usuario  = await res.json(); 
+        const data :Usuario  = await res.json();
+        console.log(data)
         return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao buscar usuario", error);
@@ -21,7 +22,9 @@ export async function PUT(request: Request,{params}:{params:{idUser:number}}) {
                 "Content-Type": "application/json",
             },body:JSON.stringify(user)
         })
-        return res.ok;
+        const data :Usuario  = await res.json(); 
+        console.log(data)
+        return NextResponse.json(data);
     } catch (error) {
         console.log("erro ao editar usuario", error);
         throw error; 
