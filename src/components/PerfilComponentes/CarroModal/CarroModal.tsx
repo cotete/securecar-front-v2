@@ -2,7 +2,7 @@ import { CarroId } from "@/app/types";
 
 import { useRef , useEffect, useState } from "react"
 import InfoCarro from "../InfoCarro/InfoCarro";
-import { Usuario } from "@/app/login/page";
+
 
 
 
@@ -18,16 +18,7 @@ const CarroModal = ({isOpen, carro,children,removerCarro} : CarroModalProps)=>{
     const ref = useRef<HTMLDialogElement>(null)
 
     const [open,setOpen] = useState(isOpen)
-    const [user, setUser] = useState<Usuario>({
-        nomeUsuario: "",
-        senha: "",
-        cpf: "",
-        genero: "",
-        rg: "",
-        idEndereco: 0,
-        idContato: 0,
-        idUsuario: 0
-    });
+    
 
     useEffect(() => {
         setOpen(isOpen);
@@ -37,18 +28,7 @@ const CarroModal = ({isOpen, carro,children,removerCarro} : CarroModalProps)=>{
       
     
       useEffect(() => {
-        const chamadaUser = async () => {
-            try {
-                const userString = sessionStorage.getItem("user");
-                if (userString) {
-                    const parsedUser :Usuario = await JSON.parse(userString);
-                    setUser(parsedUser);
-                }
-            } catch {
-                console.log("Erro")
-            }
-        }
-        chamadaUser()
+
         const dialog = ref.current;
         if (open && dialog) {
           dialog.showModal();

@@ -1,4 +1,4 @@
-import { Carro, CarroId } from "@/app/types";
+import { CarroId } from "@/app/types";
 import { NextResponse } from "next/server";
 
 
